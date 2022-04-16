@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+//FUCKIN SCUFFED
 public class LeaderBoard {
     //FIXME In current form, does not reorder the leaderboard when loading it,
     //a faulty leaderboard stays faulty
