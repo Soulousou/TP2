@@ -1,0 +1,132 @@
+# Un programme permettant de joueur au tic-tac-toe
+
+template = """
+  <div id="jeu"> 
+     <button onclick="init()">Nouvelle partie</button> <br><br> 
+     <table> 
+       <tr> 
+         <td id="case0" onclick="clic(0)"></td> 
+         <td id="case1" onclick="clic(1)"></td> 
+         <td id="case2" onclick="clic(2)"></td> 
+       </tr> 
+       <tr> 
+         <td id="case3" onclick="clic(3)"></td> 
+         <td id="case4" onclick="clic(4)"></td> 
+         <td id="case5" onclick="clic(5)"></td> 
+       </tr> 
+       <tr> 
+         <td id="case6" onclick="clic(6)"></td> 
+         <td id="case7" onclick="clic(7)"></td> 
+         <td id="case8" onclick="clic(8)"></td> 
+       </tr> 
+     </table> 
+   </div> 
+"""
+#####################
+# Etat du programme #
+#####################
+
+# Initialisation de variable globale à des fin de lisibilité
+# Ces variables sont initialisées à leur bonnes valeurs par init()
+grille = None
+joueur = None
+
+# Les index déterminant les huit positions victorieuses
+etatDeVictoire = [
+    # Horizontal
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    # Vertical
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    # Diagonal
+    [0, 4, 8],
+    [2, 4, 6],
+]
+
+##################
+# Gestion du DOM #
+##################
+
+# Fonction prenant l'index d'une case et retournant l'identifiant de
+# l'élément HTML correspondant
+def obtenirId(idCase):
+    return "case" + str(idCase)
+
+# Fonction prenant l'index d'une case et retournant
+# l'élément HTML correspondant
+def elementCase(i):
+    return document.querySelector("#" + obtenirId(i))
+
+# Fonction synchronisant le DOM à l'état du jeu
+# Cette fonction doit être appelée à chaque fois qu'un changement
+# à l'état du jeu est apporté
+def mettreAJourHTML():
+    for i in range(len(grille)):
+        element = elementCase(i)
+        element.innerHTML = grille[i]
+
+
+#######################################
+# Gestion de l'etat et des évènements #
+#######################################
+
+
+# Gestionnaire de l'évènement onclick sur un case
+def clic(i):
+    global joueur
+    
+    # On ignore le clic si un joueur a déjà gagné
+    if determinerGagnant() != "":
+        return
+    
+    # Si le clic est sur une case vide, on ajoute le symbole du joueur
+    if grille[i] == "":
+        grille[i] = joueur
+        joueur = "O" if joueur == "X" else "X"
+        mettreAJourHTML()
+        annoncerGagnantOuNulle()
+        
+# Procédure vérifiant si un joueur a gagné ou si la partie est nulle
+# et affiche un message en conséquent
+def annoncerGagnantOuNulle():
+    gagnant = determinerGagnant()
+    
+    if gagnant != "":
+        alert("Bravo joueur " + gagnant + ", tu es très doué!")
+    elif partieNulle():
+        alert("Oh non... la partie est nulle! :(")
+    
+# Fonction qui retourne le joueur victorieux dans la grille
+# Elle retourne "X" si X a gagné, "O" si O a gagné, sinon ""
+def determinerGagnant():
+    for combinaison in etatDeVictoire:
+        case1 = grille[combinaison[0]]
+        case2 = grille[combinaison[1]]
+        case3 = grille[combinaison[2]]
+        
+        if case1 == case2 == case3 != "":
+            return case1
+    return ""
+
+# Retourn True si l'état de la grille montre une partie nulle
+def partieNulle():
+    return len("".join(grille)) == 9 and determinerGagnant() == ""
+    
+# Initialise une nouvelle partie
+def init():
+    global grille
+    global joueur
+    
+    grille = [""] * 9
+    joueur = "X"
+    
+    mettreAJourHTML()
+
+# On dessine la grille HTML
+document.querySelector("#main").innerHTML = template
+
+# On commence une partie
+init()
