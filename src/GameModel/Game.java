@@ -74,6 +74,7 @@ public class Game implements Updatable {
             if(getLevel() >= 2) specialFishSpawnInterval += dt;
             normalFishSpawnInterval += dt;
             if(normalFishSpawnInterval > normalFishSpawnTime){
+                //addNewFish(); constance?
                 fishes.add(new Fish(this));
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
