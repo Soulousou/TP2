@@ -6,7 +6,7 @@ public class Fish extends Entity implements Updatable{
     final static public double HEIGHT = 100;
     final static public double WIDTH = 100;
     
-    private double lifeTime;
+    protected double lifeTime;
     private boolean alive;
     final public String imageURL;
     final public String colorString;

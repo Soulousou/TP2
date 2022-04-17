@@ -284,4 +284,9 @@ public class Vue extends Application{
 
         context.drawImage(sprite, posX-sprite.getHeight()/2, posY-sprite.getHeight()/2);
     }
+
+    public void drawBulle(double posX, double posY,double rayon, GraphicsContext context) {
+        context.setFill(Color.rgb(0, 0, 255, 0.4));
+        context.fillOval(posX - rayon, posY - rayon, 2 * rayon, 2 * rayon);
+    }
 }

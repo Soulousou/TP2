@@ -24,14 +24,17 @@ public class Game implements Updatable {
 
     final protected double normalFishSpawnTime = 3;
     final protected double specialFishSpawnTime = 5;
+    final protected double bulleSpawnTime = 3;
     final protected double graceTime = 3;
     final protected double looseTime = 3;
     final protected double gravity = 100;
     
     private double normalFishSpawnInterval;
     private double specialFishSpawnInterval;
+    private double bulleSpawnInterval;
     private LinkedList<Fish> fishes;
     private LinkedList<Bullet> bullets;
+    private LinkedList<Bulle> bulles;
 
     //BUILDER
 
@@ -44,8 +47,10 @@ public class Game implements Updatable {
         this.score = 0;
         this.normalFishSpawnInterval = 0;
         this.specialFishSpawnInterval = 0;
+        this.bulleSpawnInterval = 0;
         this.fishes = new LinkedList<>();
         this.bullets = new LinkedList<>();
+        this.bulles = new LinkedList<>();
         this.seed = new Random();
     }
 
@@ -62,6 +67,26 @@ public class Game implements Updatable {
         //Movement
         for(Fish fish : this.fishes) fish.update(dt);
         for(Bullet bullet : this.bullets) bullet.update(dt);
+        for(Bulle bulle : this.bulles) bulle.update(dt);
+
+
+        //Spawn bubbles
+        bulleSpawnInterval += dt;
+        if(bulleSpawnInterval > bulleSpawnTime){
+            for(int b=0; b<3; b++){
+                bulles.add(new Bulle(this));
+            }
+            bulleSpawnInterval -= bulleSpawnTime;
+        }
+        //Despawn
+        else if(bulleSpawnInterval == bulleSpawnTime){
+            Iterator<Bulle> bulleIterator = bulles.iterator();
+            while(bulleIterator.hasNext()){
+                Bulle bulle = bulleIterator.next();
+                bulleIterator.remove();
+            }
+        }
+
 
         if(!getGrace() && (this.lives > 0)){
             //Interactions
@@ -117,6 +142,8 @@ public class Game implements Updatable {
         bullets.add(new Bullet(posX, posY, this));
     }
 
+    public void addNewBulle(){bulles.add(new Bulle(this));}
+
     public void incrementScore(int increment){
         this.scoreIncrement += increment;
     }
@@ -163,5 +190,9 @@ public class Game implements Updatable {
 
     public LinkedList<Bullet> getBullets(){
         return bullets;
+    }
+
+    public LinkedList<Bulle> getBulles(){
+        return bulles;
     }
 }

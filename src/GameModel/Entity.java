@@ -12,6 +12,8 @@ public abstract class Entity {
     private double vY;
 
     private double aY;
+
+    private double [] x;
     
     protected void setGame(Game game){
         this.game = game;
@@ -56,5 +58,9 @@ public abstract class Entity {
 
     public double getAY(){
         return this.aY;
+    }
+
+    public double getMultipleX(int index){
+        return this.x[index];
     }
 }

@@ -52,6 +52,11 @@ public class Controler {
             vue.drawBullet(bullet.getX(), bullet.getY(), bullet.getRadius(), context);
         }
 
+        for(Bulle bulle : game.getBulles()){
+            for (int ix = 0; ix < 5; ix++){
+            vue.drawBulle(bulle.getMultipleX(ix), bulle.getY(), bulle.getRayon(), context);}
+        }
+
         if(game.getLoss()){
             this.leaderBoard = new LeaderBoard();
             if(leaderBoard.isTop10(game.getScore())){
@@ -89,5 +94,9 @@ public class Controler {
 
     public void spawnBullet(double posX, double posY){
         game.addNewBullet(posX, posY);
+    }
+
+    public void spawnBulle(){
+        game.addNewBulle();
     }
 }
