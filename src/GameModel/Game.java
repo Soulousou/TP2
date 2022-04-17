@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
+import Utility.Utility;
+
+import javax.management.modelmbean.InvalidTargetObjectTypeException;
 
 public class Game implements Updatable {
     private Random seed;
@@ -104,8 +107,12 @@ public class Game implements Updatable {
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
             if(specialFishSpawnInterval > specialFishSpawnTime){
-            //TODO add new specialfish
+
+                fishes.add((new Etoile(this)));
+                specialFishSpawnInterval -= specialFishSpawnTime;
+
             }
+
         }else{
             if(this.lives <= 0) this.looseTimer += dt;
             this.graceTimer += dt;
@@ -137,6 +144,14 @@ public class Game implements Updatable {
 
     public void addNewFish(){
         fishes.add(new Fish(this));
+    }
+
+    public void addNewCrabe(){
+        fishes.add(new Crabe(this));
+    }
+
+    public void addNewEtoile(){
+        fishes.add(new Etoile(this));
     }
 
     public void addNewBullet(double posX, double posY){

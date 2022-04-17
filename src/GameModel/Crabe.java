@@ -17,7 +17,7 @@ public class Crabe extends Fish implements Updatable{
         }
         setAY(0.0);
         setVX(1.3*(direction*(100*Math.pow(game.getLevel(), (1d/3d))+200)));
-        this.imageURL = "/Image/fish/crabe.png";
+        this.imageURL = "/Image/crabe.png";
 
     }
     public void avancer() {

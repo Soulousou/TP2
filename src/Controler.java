@@ -90,6 +90,7 @@ public class Controler {
 
     public void spawnFish(){
         game.addNewFish();
+        game.addNewEtoile();
     }
 
     public void spawnBullet(double posX, double posY){

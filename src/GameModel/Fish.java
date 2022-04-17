@@ -7,9 +7,9 @@ public class Fish extends Entity implements Updatable{
     final static public double WIDTH = 100;
     
     protected double lifeTime;
-    private boolean alive;
+    protected boolean alive;
     final public String imageURL;
-    final public String colorString;
+    public String colorString;
 
     public Fish(Game game){
         int direction = Utility.randomChoice(game.getRandom(), -1, 1);

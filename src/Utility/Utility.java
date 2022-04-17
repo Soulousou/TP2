@@ -32,4 +32,14 @@ public class Utility {
             return choice2;
         }
     }
+
+    public static Random hasard = new Random();
+    public static int nextFish() {
+        if (hasard.nextBoolean()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
 }
