@@ -5,13 +5,13 @@ import javafx.scene.image.Image;
 public abstract class Entity {
     private Game game;
 
-    private double posX;
-    private double posY;
+    protected double posX;
+    protected double posY;
 
-    private double vX;
-    private double vY;
+    protected double vX;
+    protected double vY;
 
-    private double aY;
+    protected double aY;
 
     private double [] x;
     
@@ -36,9 +36,7 @@ public abstract class Entity {
         this.aY = aY;
     }
 
-    public Game getGame(){
-        return this.game;
-    }
+    public Game getGame(){return this.game;}
 
     public double getVX(){
         return this.vX;
@@ -48,9 +46,7 @@ public abstract class Entity {
         return this.vY;
     }
 
-    public double getX(){
-        return this.posX;
-    }
+    public double getX(){return this.posX;}
 
     public double getY(){
         return this.posY;
@@ -60,7 +56,4 @@ public abstract class Entity {
         return this.aY;
     }
 
-    public double getMultipleX(int index){
-        return this.x[index];
-    }
 }

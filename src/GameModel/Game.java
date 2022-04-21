@@ -76,8 +76,17 @@ public class Game implements Updatable {
         //Spawn bubbles
         bulleSpawnInterval += dt;
         if(bulleSpawnInterval > bulleSpawnTime){
-            for(int b=0; b<3; b++){
-                bulles.add(new Bulle(this));
+            Iterator<Bulle> bulleIterator = bulles.iterator();
+            for(int groupe=0; groupe<3; groupe++){
+                Bulle bubbleToAdd = new Bulle(this);
+                double xInitial = bubbleToAdd.getX();
+
+                for(int bubbleInGroup = 0; bubbleInGroup < 5; bubbleInGroup++){
+                    Bulle bubbleAdd = new Bulle(this);
+                    //For each bubble in group, change position and speed
+                    bubbleAdd.setX(xInitial);
+                    bulles.add(bubbleAdd);
+                }
             }
             bulleSpawnInterval -= bulleSpawnTime;
         }

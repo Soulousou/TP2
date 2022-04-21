@@ -53,8 +53,7 @@ public class Controler {
         }
 
         for(Bulle bulle : game.getBulles()){
-            for (int ix = 0; ix < 5; ix++){
-            vue.drawBulle(bulle.getMultipleX(ix), bulle.getY(), bulle.getRayon(), context);}
+            vue.drawBulle(bulle.getX(), bulle.getY(), bulle.getRayon(), context);
         }
 
         if(game.getLoss()){

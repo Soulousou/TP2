@@ -2,62 +2,47 @@ package GameModel;
 
 import Utility.Utility;
 
+import java.util.Random;
+
 public class Bulle extends Fish implements Updatable {
     final double rayon;
-    private double xi;
-    private double [] x;
-    private double yi;
-    private double v;
+    private Random bulleSeed;
 
 
     public Bulle(Game game) {
         super(game);
-        this.rayon = Utility.randomInterval(game.getRandom(), 10, 40);
-        this.yi = game.windowHeight;
-        this.xi = Utility.randomInterval(game.getRandom(), 0, 640);
-        this.v = Utility.randomInterval(game.getRandom(), 350, 450);
-        this.x = setXs();
-        setVY(v);
-        setXY(xi,yi);
+        this.bulleSeed = game.getRandom();
+        this.rayon = Utility.randomInterval(bulleSeed, 10, 40);
+        this.posY = game.windowHeight;
+        this.posX = Utility.randomInterval(bulleSeed, 0, 640);
+        this.vY = Utility.randomInterval(bulleSeed, 350, 450);
+        setVY(vY);
+        setXY(posX,posY);
 
     }
+
     @Override
-    public void update(double deltaTime){
+    public void update(double deltaTime){setXY(posX, getY()-deltaTime*getVY());}
 
-        setXY(xi, getY()-deltaTime*getVY());
-
-    }
-    public double getMultipleX(int index){
-        return this.x[index];
-    }
-
-    public double[] setXs() {
-        double[] posX = new double[5];
-        posX[0] = this.xi;
-
-        for (int i = 1; i < 5; i++) {
-            posX[i] = setX(posX[0]);
-        }
-        return posX;
-    }
 
     public double setX(double xi){
         double xii = 0;
-        if(plusOuMoins()){
-            xii = xi + 20;
-        }
-        else{ xii = xi -20;}
+        if(randomBit(this.bulleSeed) == 1){xii = xi + 20;}
+
+        else if(randomBit(this.bulleSeed) == 0){ xii = xi -20;}
+
         return xii;
     }
 
-    public boolean plusOuMoins(){
-        boolean plus = true;
-        long toss = Math.round( Math.random());
-        if(toss == 1){
-            plus = true;
-        }
-        else{ plus = false;}
-        return plus;}
+    //Disclaimer: la méthode randomBit a été trouvé sur StackOverflow
+    //Écrite par Michael le 8 novembre 2015
+    //https://stackoverflow.com/questions/33600331/java-random-number-that-is-randomly-0-or-1
+
+    public static int randomBit(Random seed){
+        long seedLocal = seed.nextLong();
+        Random r = new Random(seedLocal);
+        return r.nextDouble() >= 0.5? 1 : 0;
+    }
 
 
     public double getRayon(){return this.rayon;}
