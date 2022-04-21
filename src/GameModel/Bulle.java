@@ -24,24 +24,15 @@ public class Bulle extends Fish implements Updatable {
     @Override
     public void update(double deltaTime){setXY(posX, getY()-deltaTime*getVY());}
 
+    public void setX(double xi){
+        double xii = 0.0;
+        double rand = Math.random();
+        System.out.print(rand);
+        if(rand < 0.5){xii = xi + 20;}
 
-    public double setX(double xi){
-        double xii = 0;
-        if(randomBit(this.bulleSeed) == 1){xii = xi + 20;}
+        else if(rand > 0.5){ xii = xi -20;}
 
-        else if(randomBit(this.bulleSeed) == 0){ xii = xi -20;}
-
-        return xii;
-    }
-
-    //Disclaimer: la méthode randomBit a été trouvé sur StackOverflow
-    //Écrite par Michael le 8 novembre 2015
-    //https://stackoverflow.com/questions/33600331/java-random-number-that-is-randomly-0-or-1
-
-    public static int randomBit(Random seed){
-        long seedLocal = seed.nextLong();
-        Random r = new Random(seedLocal);
-        return r.nextDouble() >= 0.5? 1 : 0;
+        this.posX = xii;
     }
 
 

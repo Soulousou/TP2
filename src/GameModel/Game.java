@@ -80,9 +80,11 @@ public class Game implements Updatable {
             for(int groupe=0; groupe<3; groupe++){
                 Bulle bubbleToAdd = new Bulle(this);
                 double xInitial = bubbleToAdd.getX();
+                bulles.add(bubbleToAdd);
 
-                for(int bubbleInGroup = 0; bubbleInGroup < 5; bubbleInGroup++){
+                for(int bubbleInGroup = 0; bubbleInGroup < 4; bubbleInGroup++){
                     Bulle bubbleAdd = new Bulle(this);
+
                     //For each bubble in group, change position and speed
                     bubbleAdd.setX(xInitial);
                     bulles.add(bubbleAdd);
