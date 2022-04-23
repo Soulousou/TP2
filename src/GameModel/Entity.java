@@ -13,7 +13,8 @@ public abstract class Entity {
 
     protected double aY;
 
-    private double [] x;
+    protected String url;
+
     
     protected void setGame(Game game){
         this.game = game;
@@ -36,6 +37,8 @@ public abstract class Entity {
         this.aY = aY;
     }
 
+    protected void setUrl(String url){this.url = url;}
+
     public Game getGame(){return this.game;}
 
     public double getVX(){
@@ -55,5 +58,8 @@ public abstract class Entity {
     public double getAY(){
         return this.aY;
     }
+
+    public String getUrL(){return this.url;}
+
 
 }

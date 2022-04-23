@@ -8,7 +8,6 @@ public class Fish extends Entity implements Updatable{
     
     protected double lifeTime;
     protected boolean alive;
-    final public String imageURL;
     public String colorString;
 
     public Fish(Game game){
@@ -26,9 +25,9 @@ public class Fish extends Entity implements Updatable{
         setAY(game.gravity);
 
         setGame(game);
-        this.alive = true;
+        setAlive(true);
         this.colorString = Utility.getHexColorCode(game.getRandom().nextInt(16777215));
-        this.imageURL = "/Image/fish/0" + game.getRandom().nextInt(8)+ ".png";
+        setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
     
     @Override 

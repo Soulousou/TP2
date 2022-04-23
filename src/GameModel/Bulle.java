@@ -27,14 +27,12 @@ public class Bulle extends Fish implements Updatable {
     public void setX(double xi){
         double xii = 0.0;
         double rand = Math.random();
-        System.out.print(rand);
         if(rand < 0.5){xii = xi + 20;}
 
         else if(rand > 0.5){ xii = xi -20;}
 
         this.posX = xii;
     }
-
 
     public double getRayon(){return this.rayon;}
 

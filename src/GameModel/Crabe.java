@@ -5,8 +5,6 @@ import java.lang.Math;
 
 public class Crabe extends Fish implements Updatable{
 
-    final public String imageURL;
-    protected double posX;
 
     public Crabe(Game game) {
         super(game);
@@ -17,15 +15,15 @@ public class Crabe extends Fish implements Updatable{
         }
         setAY(0.0);
         setVX(1.3*(direction*(100*Math.pow(game.getLevel(), (1d/3d))+200)));
-        this.imageURL = "/Image/crabe.png";
+        setUrl("/Image/crabe.png");
 
     }
     public void avancer() {
-        setXY(posX + getVX() * 0.5 * 1E-9, getY());
+        setXY(posX + getVX() * 0.5 , getY());
     }
 
     public void reculer() {
-        setXY(posX + -1*getVX() * 0.25 * 1E-9, getY());
+        setXY(posX + -1*getVX() * 0.25, getY());
     }
 
     @Override
@@ -36,7 +34,6 @@ public class Crabe extends Fish implements Updatable{
             while(inBounds()){
                 avancer();
                 reculer();
-                setXY(getX()+deltaTime*getVX(), getY());
             }
         }
 

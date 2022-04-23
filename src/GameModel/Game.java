@@ -26,7 +26,7 @@ public class Game implements Updatable {
     
 
     final protected double normalFishSpawnTime = 3;
-    final protected double specialFishSpawnTime = 5;
+    final protected double specialFishSpawnTime = 3;
     final protected double bulleSpawnTime = 3;
     final protected double graceTime = 3;
     final protected double looseTime = 3;
@@ -49,6 +49,7 @@ public class Game implements Updatable {
         this.lives = 3;
         this.score = 0;
         this.normalFishSpawnInterval = 0;
+        //A CHANGER POUR DEBUG (valeur = 5)
         this.specialFishSpawnInterval = 0;
         this.bulleSpawnInterval = 0;
         this.fishes = new LinkedList<>();
@@ -76,7 +77,6 @@ public class Game implements Updatable {
         //Spawn bubbles
         bulleSpawnInterval += dt;
         if(bulleSpawnInterval > bulleSpawnTime){
-            Iterator<Bulle> bulleIterator = bulles.iterator();
             for(int groupe=0; groupe<3; groupe++){
                 Bulle bubbleToAdd = new Bulle(this);
                 double xInitial = bubbleToAdd.getX();
@@ -85,7 +85,7 @@ public class Game implements Updatable {
                 for(int bubbleInGroup = 0; bubbleInGroup < 4; bubbleInGroup++){
                     Bulle bubbleAdd = new Bulle(this);
 
-                    //For each bubble in group, change position and speed
+                    //For each bubble in group, change position
                     bubbleAdd.setX(xInitial);
                     bulles.add(bubbleAdd);
                 }
@@ -96,7 +96,6 @@ public class Game implements Updatable {
         else if(bulleSpawnInterval == bulleSpawnTime){
             Iterator<Bulle> bulleIterator = bulles.iterator();
             while(bulleIterator.hasNext()){
-                Bulle bulle = bulleIterator.next();
                 bulleIterator.remove();
             }
         }
@@ -110,7 +109,7 @@ public class Game implements Updatable {
 
             //Spawn
             //Does not apply for grace
-            if(getLevel() >= 2) specialFishSpawnInterval += dt;
+            if(getLevel() >= 2){ specialFishSpawnInterval += dt;}
             normalFishSpawnInterval += dt;
             if(normalFishSpawnInterval > normalFishSpawnTime){
                 //addNewFish(); constance?
@@ -118,11 +117,12 @@ public class Game implements Updatable {
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
             if(specialFishSpawnInterval > specialFishSpawnTime){
+                double rand = Math.random();
+                if(rand < 0.5){fishes.add((new Etoile(this)));}
 
-                fishes.add((new Etoile(this)));
-                specialFishSpawnInterval -= specialFishSpawnTime;
+                else if(rand > 0.5){fishes.add((new Crabe(this)));}
 
-            }
+                specialFishSpawnInterval -= specialFishSpawnTime;}
 
         }else{
             if(this.lives <= 0) this.looseTimer += dt;
@@ -169,8 +169,6 @@ public class Game implements Updatable {
         bullets.add(new Bullet(posX, posY, this));
     }
 
-    public void addNewBulle(){bulles.add(new Bulle(this));}
-
     public void incrementScore(int increment){
         this.scoreIncrement += increment;
     }
@@ -211,9 +209,7 @@ public class Game implements Updatable {
         return this.looseTimer >= this.looseTime && this.lives <= 0;
     }
 
-    public LinkedList<Fish> getFishes(){
-        return fishes;
-    }
+    public LinkedList<Fish> getFishes(){return fishes;}
 
     public LinkedList<Bullet> getBullets(){
         return bullets;
