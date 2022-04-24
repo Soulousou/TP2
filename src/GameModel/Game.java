@@ -8,6 +8,8 @@ import Utility.Utility;
 
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
 
+import static Utility.Utility.randomChoice;
+
 public class Game implements Updatable {
     private Random seed;
 
@@ -49,8 +51,7 @@ public class Game implements Updatable {
         this.lives = 3;
         this.score = 0;
         this.normalFishSpawnInterval = 0;
-        //A CHANGER POUR DEBUG (valeur = 5)
-        this.specialFishSpawnInterval = 0;
+        this.specialFishSpawnInterval = 5;
         this.bulleSpawnInterval = 0;
         this.fishes = new LinkedList<>();
         this.bullets = new LinkedList<>();
@@ -117,10 +118,10 @@ public class Game implements Updatable {
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
             if(specialFishSpawnInterval > specialFishSpawnTime){
-                double rand = Math.random();
-                if(rand < 0.5){fishes.add((new Etoile(this)));}
+                int rand = randomChoice(seed, 0, 1);
+                if(rand == 1){fishes.add((new Etoile(this)));}
 
-                else if(rand > 0.5){fishes.add((new Crabe(this)));}
+                else if(rand == 0){fishes.add((new Crabe(this)));}
 
                 specialFishSpawnInterval -= specialFishSpawnTime;}
 

@@ -88,6 +88,7 @@ public class LeaderBoard {
         }
         scoresInt.add(i, newScore);
         scoresName.add(i, name);
+        //System.out.println(scoresInt);
         
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt"));

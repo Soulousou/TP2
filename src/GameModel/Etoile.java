@@ -26,8 +26,8 @@ public class Etoile extends Fish {
         if(getAlive()){
             this.lifeTime += deltaTime;
 
-            setXY(getX()+deltaTime*getVX(), 50*Math.sin(Math.PI*deltaTime));
-            System.out.print(deltaTime+ "###");
+            setXY(getX()+deltaTime*getVX(), getY()+(50*Math.sin(Math.PI*deltaTime)));
+            //System.out.print(getY()+ "###");
         }
 
     }

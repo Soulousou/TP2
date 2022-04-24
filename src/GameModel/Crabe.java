@@ -18,11 +18,11 @@ public class Crabe extends Fish implements Updatable{
         setUrl("/Image/crabe.png");
 
     }
-    public void avancer() {
+    public void avancer(double deltatime) {
         setXY(posX + getVX() * 0.5 , getY());
     }
 
-    public void reculer() {
+    public void reculer(double deltatime) {
         setXY(posX + -1*getVX() * 0.25, getY());
     }
 
@@ -32,8 +32,8 @@ public class Crabe extends Fish implements Updatable{
             this.lifeTime += deltaTime;
 
             while(inBounds()){
-                avancer();
-                reculer();
+                avancer(0.5);
+                reculer(0.25);
             }
         }
 
