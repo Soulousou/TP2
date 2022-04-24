@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -87,8 +88,10 @@ public class LeaderBoard {
             }
         }
         scoresInt.add(i, newScore);
-        scoresName.add(i, name);
-        //System.out.println(scoresInt);
+        scoresInt.sort(Comparator.reverseOrder());
+        int nouv = scoresInt.indexOf(newScore);
+        scoresName.add(nouv, name);
+
         
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt"));
