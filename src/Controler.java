@@ -3,14 +3,14 @@ import LeaderboardModel.*;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Controler {
-    private FIshHunt vue;
+    private FishHunt vue;
     private Game game;
     private LeaderBoard leaderBoard;
 
     private double cursorX;
     private double cursorY;
 
-    public Controler(FIshHunt vue){
+    public Controler(FishHunt vue){
         this.vue = vue;
         this.leaderBoard = new LeaderBoard();
     }
