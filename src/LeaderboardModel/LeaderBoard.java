@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 
@@ -15,110 +17,96 @@ import java.util.Scanner;
 public class LeaderBoard {
     //FIXME In current form, does not reorder the leaderboard when loading it,
     //a faulty leaderboard stays faulty
-    private ArrayList<String> scoresStrings ;   //= new ArrayList<>();
-    private ArrayList<Integer> scoresInt;   //=new ArrayList<>();
-    private ArrayList<String> scoresName;   //=new ArrayList<>();
+    ArrayList<Player> top10;
+    Player lastPlayer;
 
     public LeaderBoard(){
-        scoresStrings = new ArrayList<>();
-        scoresInt = new ArrayList<>();
-        scoresName = new ArrayList<>();
+        top10 = new ArrayList<>();
 
         Scanner scan;
         try {
             scan = new Scanner(new File("scores.txt"));
             while(scan.hasNext()){
                 String line = scan.nextLine();
-                scoresStrings.add(line);
                 try{
-                    scoresInt.add(Integer.parseInt(line.split("-")[2]));
-                    scoresName.add(line.split("-")[1]);
-                }catch(IndexOutOfBoundsException e){
-                    System.out.println("ERREUR: Mauvais formatage du document (separation)");
-                }catch(NumberFormatException e){
-                    System.out.println("ERREUR: Mauvais formatage du document (int non trouve)");
+                    Player newLinePlayer = new Player(line);
+                    top10.add(newLinePlayer);
+                }catch(BadDataFormat e){
+                    System.out.println("Error detected in scores.txt data format");
                 }
+                
             }
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            System.out.println("not found");
+            System.out.println("File not found");
             e.printStackTrace();
         }
+        top10.sort(Comparator.reverseOrder());
+        trimTop10();
     }
 
-    public void readLeaderBoard(){
-        Scanner scan;
-        try {
-            scan = new Scanner(new File("scores.txt"));
-            while(scan.hasNext()){
-                String line = scan.nextLine();
-                scoresStrings.add(line);
-                try{
-                    scoresInt.add(Integer.parseInt(line.split("-")[2]));
-                }catch(IndexOutOfBoundsException e){
-                    System.out.println("ERREUR: Mauvais formatage du document (separation)");
-                }catch(NumberFormatException e){
-                    System.out.println("ERREUR: Mauvais formatage du document (int non trouve)");
-                }
-            }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            System.out.println("not found");
-            e.printStackTrace();
-        }
-    }
-
-    public boolean isTop10(int newScore){
-        try{
-            return newScore > scoresInt.get(9);
-        }catch(IndexOutOfBoundsException e){
-            return true;
-        }
-    }
-
-    public void addEntry(String name, int newScore){
-        int i = 0;
-        boolean condition = true;
-        while(condition){
-            try{
-                condition = newScore < scoresInt.get(i);
-                i++;
-            }catch(IndexOutOfBoundsException e){
+    public boolean addPlayer(Player player){
+        this.lastPlayer = player;
+        boolean playerAdded = false;
+        ListIterator<Player> playerIterator = top10.listIterator();
+        while(playerIterator.hasNext()){
+            Player leaderBoardPlayer = playerIterator.next();
+            if(player.compareTo(leaderBoardPlayer) > 0){
+                playerIterator.add(player);
+                playerAdded = true;
                 break;
             }
         }
-        scoresInt.add(i, newScore);
-        scoresInt.sort(Comparator.reverseOrder());
-        int nouv = scoresInt.indexOf(newScore);
-        scoresName.add(nouv, name);
-
-        
-        try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt"));
-            ArrayList<String> formatedStrings = getFormatedScoreStrings();
-
-            for(String line : getFormatedScoreStrings()){
-                writer.append(line);
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException e) {}
-        //FIXME does add the elements in order well,
-        //test if becose leaderboard is not full.
+        top10.sort(Comparator.reverseOrder());
+        trimTop10();
+        return playerAdded;
     }
-
-
 
     public ArrayList<String> getFormatedScoreStrings(){
         ArrayList<String> formatedScores = new ArrayList<>();
-
-        for(int i=0; i<10; i++){
-            try{
-                formatedScores.add("#"+ (i+1) +"-"+scoresName.get(i)+"-"+scoresInt.get(i));
-            }catch(IndexOutOfBoundsException e){
-                return formatedScores;
+        int index = 1;
+        ListIterator<Player> playerIterator = top10.listIterator();
+        while(playerIterator.hasNext()  && index <= 10){
+            Player leaderBoardPlayer = playerIterator.next();
+            if(leaderBoardPlayer.hasName()){
+                formatedScores.add("#" + (index) + "-" + leaderBoardPlayer.name + "-" + leaderBoardPlayer.score);
+                index++;
             }
         }
+
         return formatedScores;
+    }
+
+    private void trimTop10(){
+        while(top10.size() > 11){
+            top10.remove(11);
+        }
+    }
+
+    public void setLastPlayerInfo(String name){
+        this.lastPlayer.name = name;
+    }
+
+    public void saveLeaderboard(){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt"));
+            for (String entry : getFormatedScoreStrings()) {
+                writer.write(entry);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+    }
+
+    public void removeUnamed(){
+        ListIterator<Player> playerIterator = top10.listIterator();
+        while(playerIterator.hasNext()){
+            Player leaderBoardPlayer = playerIterator.next();
+            if(!leaderBoardPlayer.hasName()){
+                playerIterator.remove();
+            }
+        }
     }
 }

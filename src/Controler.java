@@ -16,7 +16,8 @@ public class Controler {
 
     public Controler(Vue vue){
         this.vue = vue;
-        }
+        this.leaderBoard = new LeaderBoard();
+    }
 
     public void startGame(){
         game = new Game(vue.w, vue.h);
@@ -24,17 +25,16 @@ public class Controler {
     }
 
     public void goToLeaderBoard(){
-        this.leaderBoard = new LeaderBoard();
         vue.leaderBoardScene(leaderBoard.getFormatedScoreStrings());
     }
 
     public void addLastGameToLeaderBoard(String name){
-        this.leaderBoard = new LeaderBoard();
-        this.leaderBoard.addEntry(name, game.getScore());
+        this.leaderBoard.setLastPlayerInfo(name);
     }
 
     public void goToMenu(){
         vue.menu();
+        leaderBoard.removeUnamed();
     }
     
     public void updateGame(double dt, GraphicsContext context){
@@ -57,8 +57,8 @@ public class Controler {
         }
 
         if(game.getLoss()){
-            this.leaderBoard = new LeaderBoard();
-            if(leaderBoard.isTop10(game.getScore())){
+            Player player = new Player(game);
+            if(this.leaderBoard.addPlayer(player)){
                 vue.leaderBoardScene(game.getScore(), leaderBoard.getFormatedScoreStrings());
             }else{
                 vue.leaderBoardScene(leaderBoard.getFormatedScoreStrings());
@@ -94,6 +94,10 @@ public class Controler {
 
     public void spawnBullet(double posX, double posY){
         game.addNewBullet(posX, posY);
+    }
+
+    public void saveLeaderboard(){
+        leaderBoard.saveLeaderboard();
     }
 
 }

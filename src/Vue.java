@@ -182,6 +182,7 @@ public class Vue extends Application{
         submit.setOnAction((event) -> {
             controler.addLastGameToLeaderBoard(nomField.getText());
             controler.goToMenu();
+            controler.saveLeaderboard();
         });
 
         Button menu = new Button("Menu");

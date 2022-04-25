@@ -21,7 +21,7 @@ public class Fish extends Entity implements Updatable{
         setXY(posX, Utility.randomInterval(game.getRandom(), 0.2, 0.8)*game.windowHeight);
         
         setVX(direction*(100*Math.pow(game.getLevel(), (1d/3d))+200));
-        setVY(Utility.randomInterval(game.getRandom(), 100, 200));
+        setVY(Utility.randomInterval(game.getRandom(), -100, -200));
 
         setAY(game.gravity);
 
