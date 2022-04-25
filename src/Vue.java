@@ -3,7 +3,6 @@
  * @author belan
 **/
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.*;
 import javafx.stage.*;
@@ -16,12 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.image.*;
-import javafx.scene.input.KeyCode;
 import javafx.geometry.*;
-
 import java.util.ArrayList;
-
-import GameModel.*;
 import Utility.ImageHelpers;
 
 

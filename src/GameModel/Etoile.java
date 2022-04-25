@@ -1,5 +1,5 @@
 package GameModel;
-import Utility.Utility;
+
 import java.lang.Math;
 
 public class Etoile extends Fish {

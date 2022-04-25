@@ -1,7 +1,5 @@
 package GameModel;
 
-import javafx.scene.image.Image;
-
 public abstract class Entity {
     private Game game;
 

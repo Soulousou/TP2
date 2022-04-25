@@ -2,8 +2,6 @@ package GameModel;
 
 import Utility.Utility;
 
-import java.util.Random;
-
 public class Bulle extends Entity implements Updatable {
     final private double rayon;
 

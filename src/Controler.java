@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import GameModel.*;
 import LeaderboardModel.*;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,15 +10,13 @@ public class Controler {
     private double cursorX;
     private double cursorY;
 
-    ArrayList<String> str = new ArrayList<>() ; //TODO remove debug
-
     public Controler(Vue vue){
         this.vue = vue;
         this.leaderBoard = new LeaderBoard();
     }
 
     public void startGame(){
-        game = new Game(vue.w, vue.h);
+        game = new Game(vue.getWidth(), vue.getHeight());
         vue.gameScene();
     }
 

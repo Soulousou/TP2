@@ -1,12 +1,9 @@
 package GameModel;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 import Utility.Utility;
-
-import javax.management.modelmbean.InvalidTargetObjectTypeException;
 
 import static Utility.Utility.randomChoice;
 
@@ -15,7 +12,7 @@ public class Game implements Updatable {
 
     final protected double windowWidth;
     final protected double windowHeight;
-    private double gameTime;
+    //private double gameTime; //TODO remove
     private double graceTimer;
     private double looseTimer;
     private int levelScore;
@@ -46,7 +43,7 @@ public class Game implements Updatable {
     public Game( double windowWidth, double windowHeight){
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
-        this.gameTime = 0;
+        //this.gameTime = 0; TODO remove
         this.lastLevel = 0;
         this.lives = 3;
         this.score = 0;

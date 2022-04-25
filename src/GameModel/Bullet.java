@@ -3,11 +3,10 @@ package GameModel;
 public class Bullet extends Entity implements Updatable {
     private double radius;
     final private double shrink = 300;
-    private boolean impact;
 
     public Bullet(double posX, double posY, Game game){
         this.setGame(game);
-        this.impact = false;
+        //this.impact = false; //TODO remove
         this.radius = 50;
         this.setXY(posX, posY);
     }

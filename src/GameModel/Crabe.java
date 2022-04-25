@@ -1,9 +1,6 @@
 package GameModel;
-import Utility.Utility;
 
-import java.lang.Math;
-
-public class Crabe extends Fish implements Updatable{
+public class Crabe extends Fish{
 
     //periode de 0.75, 0.5 premiers forward, 0.25 dernier back
     private final double forwardsTime = 0.5;

@@ -1,22 +1,12 @@
 package LeaderboardModel;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-
-//FUCKIN SCUFFED
 public class LeaderBoard {
-    //FIXME In current form, does not reorder the leaderboard when loading it,
-    //a faulty leaderboard stays faulty
     ArrayList<Player> top10;
     Player lastPlayer;
 
