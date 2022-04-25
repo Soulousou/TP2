@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import Utility.ImageHelpers;
 
 
-public class FIshHunt extends Application{
+public class FishHunt extends Application{
     public static void main(String[] args) {
         launch(args);
     }
