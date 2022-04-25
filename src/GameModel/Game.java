@@ -51,7 +51,7 @@ public class Game implements Updatable {
         this.lives = 3;
         this.score = 0;
         this.normalFishSpawnInterval = 0;
-        this.specialFishSpawnInterval = 5;
+        this.specialFishSpawnInterval = 0;
         this.bulleSpawnInterval = 0;
         this.fishes = new LinkedList<>();
         this.bullets = new LinkedList<>();
@@ -79,26 +79,15 @@ public class Game implements Updatable {
         bulleSpawnInterval += dt;
         if(bulleSpawnInterval > bulleSpawnTime){
             for(int groupe=0; groupe<3; groupe++){
-                Bulle bubbleToAdd = new Bulle(this);
-                double xInitial = bubbleToAdd.getX();
-                bulles.add(bubbleToAdd);
+                Bulle rootBubble = new Bulle(this);
+                bulles.add(rootBubble);
 
                 for(int bubbleInGroup = 0; bubbleInGroup < 4; bubbleInGroup++){
-                    Bulle bubbleAdd = new Bulle(this);
-
-                    //For each bubble in group, change position
-                    bubbleAdd.setX(xInitial);
+                    Bulle bubbleAdd = new Bulle(this, rootBubble);
                     bulles.add(bubbleAdd);
                 }
             }
             bulleSpawnInterval -= bulleSpawnTime;
-        }
-        //Despawn
-        else if(bulleSpawnInterval == bulleSpawnTime){
-            Iterator<Bulle> bulleIterator = bulles.iterator();
-            while(bulleIterator.hasNext()){
-                bulleIterator.remove();
-            }
         }
 
 
@@ -130,7 +119,7 @@ public class Game implements Updatable {
             this.graceTimer += dt;
         }
 
-        //Remove dead
+        //Remove dead and despawn bubbles
         Iterator<Fish> fishIterator = fishes.iterator();
         while(fishIterator.hasNext()){
             Fish fish = fishIterator.next();
@@ -140,6 +129,14 @@ public class Game implements Updatable {
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
             if(bullet.getImpact()) bulletIterator.remove();
+        }
+        Iterator<Bulle> bulleIterator = bulles.iterator();
+        while(bulleIterator.hasNext()){
+            Bulle bulle = bulleIterator.next();
+            if(bulle.getY() < -50){
+                bulleIterator.remove();
+            }
+            
         }
 
         //Change stats

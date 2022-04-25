@@ -8,10 +8,11 @@ public class Fish extends Entity implements Updatable{
     
     protected double lifeTime;
     protected boolean alive;
+    protected int direction;
     public String colorString;
 
     public Fish(Game game){
-        int direction = Utility.randomChoice(game.getRandom(), -1, 1);
+        this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
         double posX=0;
         if(direction < 0){
             posX = game.windowWidth;
@@ -66,5 +67,9 @@ public class Fish extends Entity implements Updatable{
 
     protected void setAlive(boolean alive){
         this.alive = alive;
+    }
+
+    public int getDirection(){
+        return direction;
     }
 }

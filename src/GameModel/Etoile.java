@@ -4,19 +4,13 @@ import java.lang.Math;
 
 public class Etoile extends Fish {
 
+    private double spawnY;
 
     public Etoile(Game game) {
         super(game);
-        int direction = Utility.randomChoice(game.getRandom(), -1, 1);
-        double posX=0;
-        if(direction < 0){
-            posX = game.windowWidth;
-        }
-
-        setGame(game);
-        setAlive(true);
-        this.colorString = Utility.getHexColorCode(game.getRandom().nextInt(16777215));
+        this.colorString = "XXX";
         setUrl("/Image/star.png");
+        this.spawnY = getY();
     }
 
 
@@ -26,7 +20,7 @@ public class Etoile extends Fish {
         if(getAlive()){
             this.lifeTime += deltaTime;
 
-            setXY(getX()+deltaTime*getVX(), getY()+(50*Math.sin(Math.PI*deltaTime)));
+            setXY(getX()+deltaTime*getVX(), this.spawnY+(50*Math.sin(Math.PI*this.lifeTime)));
             //System.out.print(getY()+ "###");
         }
 

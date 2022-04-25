@@ -280,7 +280,11 @@ public class Vue extends Application{
     public void drawFish(double posX, double posY, double width, double height, String url, String color, boolean flop, GraphicsContext context){
         Image sprite = new Image(url, width, height, true, false);
         if(flop){sprite = ImageHelpers.flop(sprite);}
-        sprite = ImageHelpers.colorize(sprite, Color.web(color));
+        System.out.println(color);
+        if(color.matches("#?[a-fA-Z0-9]{6}")){
+            sprite = ImageHelpers.colorize(sprite, Color.web(color));
+        }
+        
 
         context.drawImage(sprite, posX-sprite.getHeight()/2, posY-sprite.getHeight()/2);
     }

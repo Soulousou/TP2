@@ -4,21 +4,23 @@ import Utility.Utility;
 
 import java.util.Random;
 
-public class Bulle extends Fish implements Updatable {
-    final double rayon;
-    private Random bulleSeed;
-
+public class Bulle extends Entity implements Updatable {
+    final private double rayon;
 
     public Bulle(Game game) {
-        super(game);
-        this.bulleSeed = game.getRandom();
-        this.rayon = Utility.randomInterval(bulleSeed, 10, 40);
-        this.posY = game.windowHeight;
-        this.posX = Utility.randomInterval(bulleSeed, 0, 640);
-        this.vY = Utility.randomInterval(bulleSeed, 350, 450);
-        setVY(vY);
-        setXY(posX,posY);
+        setGame(game);
 
+        this.rayon = Utility.randomInterval(game.getRandom(), 10, 40);
+        setVY(Utility.randomInterval(game.getRandom(), 350, 450));
+        setXY(Utility.randomInterval(game.getRandom(), 0, 640),game.windowHeight+40);
+    }
+
+    public Bulle(Game game, Bulle root){
+        setGame(game);
+
+        this.rayon = Utility.randomInterval(game.getRandom(), 10, 40);
+        setVY(Utility.randomInterval(game.getRandom(), 350, 450));
+        setXY(root.getX() + Utility.randomInterval(game.getRandom(), -20, 20), game.windowHeight+40);
     }
 
     @Override
