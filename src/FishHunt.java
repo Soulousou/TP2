@@ -1,7 +1,8 @@
 /**
- *
- * @author belan
-**/
+ * Fichier : FishHunt.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
 
 import javafx.animation.AnimationTimer;
 import javafx.application.*;
@@ -43,6 +44,7 @@ public class FishHunt extends Application{
         this.stage.setResizable(false);
     }
 
+    //Scene du menu
     public void menu(){
         try {animation.stop();} catch (Exception e) {}
         StackPane pane = new StackPane();
@@ -75,6 +77,7 @@ public class FishHunt extends Application{
         this.stage.setScene(menu);
     }
 
+    //Scene du jeu avec le timer qui commence lorsqu'on l'entre
     public void gameScene(){
         try {animation.stop();} catch (Exception e) {}
         Pane pane = new Pane();
@@ -112,6 +115,7 @@ public class FishHunt extends Application{
             controler.spawnBullet(event.getX(), event.getY());
         });
 
+        //Pour debug
         gameScene.setOnKeyPressed((event) -> {
             switch(event.getCode()){
                 case J:
@@ -138,6 +142,7 @@ public class FishHunt extends Application{
         this.stage.setScene(gameScene);
     }
 
+    //Scene du leaderbord avec ajout de nom
     public void leaderBoardScene(int score, ArrayList<String> bestScores){
         try {animation.stop();} catch (Exception e) {}
 
@@ -189,6 +194,7 @@ public class FishHunt extends Application{
         this.stage.setScene(scene);
     }
 
+    //Final après l'ajout de nom
     public void leaderBoardScene(ArrayList<String> bestScores){
         try {animation.stop();} catch (Exception e) {}
 
@@ -235,6 +241,7 @@ public class FishHunt extends Application{
         context.drawImage(cible, posX-cible.getWidth()/2, posY-cible.getHeight()/2 );;
     }
 
+    //Afficher les attributs du jeu( vies, scores, niveau)
     public void drawGameHUD(int score, int lives, int level, boolean isGrace, GraphicsContext context){
         
         context.setFill(Color.WHITE);
@@ -275,7 +282,6 @@ public class FishHunt extends Application{
     public void drawFish(double posX, double posY, double width, double height, String url, String color, boolean flop, GraphicsContext context){
         Image sprite = new Image(url, width, height, true, false);
         if(flop){sprite = ImageHelpers.flop(sprite);}
-        System.out.println(color);
         if(color.matches("#?[a-fA-Z0-9]{6}")){
             sprite = ImageHelpers.colorize(sprite, Color.web(color));
         }

@@ -1,3 +1,9 @@
+/**
+ * Fichier : Player.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package LeaderboardModel;
 
 import GameModel.Game;
@@ -7,7 +13,7 @@ public class Player implements Comparable<Player>{
     protected String name;
     
     public Player(String dataEntryLine) throws BadDataFormat{
-        String regex = "#(\\d{1,2})-(.{1,})-(\\d{1,})";
+        String regex = "#(\\d{1,2})-(.{1,})-(\\d{1,})"; //bon format du score à afficher
         if(dataEntryLine.matches(regex)){
             this.score = Integer.parseInt(dataEntryLine.replaceAll(regex, "$3"));
             this.name = dataEntryLine.replaceAll(regex, "$2");

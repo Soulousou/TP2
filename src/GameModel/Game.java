@@ -1,9 +1,14 @@
+/**
+ * Fichier : Game.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-import Utility.Utility;
 
 import static Utility.Utility.randomChoice;
 
@@ -12,7 +17,6 @@ public class Game implements Updatable {
 
     final protected double windowWidth;
     final protected double windowHeight;
-    //private double gameTime; //TODO remove
     private double graceTimer;
     private double looseTimer;
     private int levelScore;
@@ -43,7 +47,6 @@ public class Game implements Updatable {
     public Game( double windowWidth, double windowHeight){
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
-        //this.gameTime = 0; TODO remove
         this.lastLevel = 0;
         this.lives = 3;
         this.score = 0;
@@ -99,7 +102,6 @@ public class Game implements Updatable {
             if(getLevel() >= 2){ specialFishSpawnInterval += dt;}
             normalFishSpawnInterval += dt;
             if(normalFishSpawnInterval > normalFishSpawnTime){
-                //addNewFish(); constance?
                 fishes.add(new Fish(this));
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
@@ -170,10 +172,6 @@ public class Game implements Updatable {
 
     public void incrementLives(int increment){
         this.livesIncrement += increment;
-        //TODO remove debug, inders performance
-        // System.out.println("XXXXXXXXXXXXX");
-        // System.out.println(this.lives);
-        // System.out.println(System.nanoTime()*1e-9);
     }
 
     public void incrementLevel(int increment){

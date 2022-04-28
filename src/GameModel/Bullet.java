@@ -1,3 +1,9 @@
+/**
+ * Fichier : Bullet.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
 public class Bullet extends Entity implements Updatable {
@@ -6,7 +12,6 @@ public class Bullet extends Entity implements Updatable {
 
     public Bullet(double posX, double posY, Game game){
         this.setGame(game);
-        //this.impact = false; //TODO remove
         this.radius = 50;
         this.setXY(posX, posY);
     }

@@ -1,5 +1,12 @@
+/**
+ * Fichier : Entity.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
+//Les attributs, setters et getters des objets du jeu
 public abstract class Entity {
     private Game game;
 
