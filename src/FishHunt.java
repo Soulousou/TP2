@@ -285,8 +285,6 @@ public class FishHunt extends Application{
         if(color.matches("#?[a-fA-Z0-9]{6}")){
             sprite = ImageHelpers.colorize(sprite, Color.web(color));
         }
-        
-
         context.drawImage(sprite, posX-sprite.getHeight()/2, posY-sprite.getHeight()/2);
     }
 
