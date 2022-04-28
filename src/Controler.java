@@ -1,3 +1,9 @@
+/**
+ * Fichier : Controler.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 import GameModel.*;
 import LeaderboardModel.*;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,7 +38,7 @@ public class Controler {
         vue.menu();
         leaderBoard.removeUnamed();
     }
-    
+    //Dessiner les objets selon leur position actuelle avec le temps
     public void updateGame(double dt, GraphicsContext context){
         game.update(dt);
 
@@ -51,7 +57,7 @@ public class Controler {
         for(Bulle bulle : game.getBulles()){
             vue.drawBulle(bulle.getX(), bulle.getY(), bulle.getRayon(), context);
         }
-
+        //Ajouter un score quand la partie se termine
         if(game.getLoss()){
             Player player = new Player(game);
             if(this.leaderBoard.addPlayer(player)){
@@ -83,9 +89,11 @@ public class Controler {
         this.cursorY = posY;
     }
 
+    //Pour debug
     public void spawnFish(){
-        //game.addNewFish();
+        game.addNewFish();
         game.addNewEtoile();
+        game.addNewCrabe();
     }
 
     public void spawnBullet(double posX, double posY){

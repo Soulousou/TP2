@@ -1,9 +1,15 @@
+/**
+ * Fichier : Game.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-import Utility.Utility;
+
 
 import static Utility.Utility.randomChoice;
 
@@ -12,7 +18,6 @@ public class Game implements Updatable {
 
     final protected double windowWidth;
     final protected double windowHeight;
-    //private double gameTime; //TODO remove
     private double graceTimer;
     private double looseTimer;
     private int levelScore;
@@ -43,7 +48,6 @@ public class Game implements Updatable {
     public Game( double windowWidth, double windowHeight){
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
-        //this.gameTime = 0; TODO remove
         this.lastLevel = 0;
         this.lives = 3;
         this.score = 0;
@@ -76,10 +80,12 @@ public class Game implements Updatable {
         bulleSpawnInterval += dt;
         if(bulleSpawnInterval > bulleSpawnTime){
             for(int groupe=0; groupe<3; groupe++){
+                //Ajouter la premiere bulle "root" du groupe
                 Bulle rootBubble = new Bulle(this);
                 bulles.add(rootBubble);
 
                 for(int bubbleInGroup = 0; bubbleInGroup < 4; bubbleInGroup++){
+                    //Ajouter les 4 autres bulles à partir du "root"
                     Bulle bubbleAdd = new Bulle(this, rootBubble);
                     bulles.add(bubbleAdd);
                 }
@@ -104,6 +110,7 @@ public class Game implements Updatable {
                 normalFishSpawnInterval -= normalFishSpawnTime;
             }
             if(specialFishSpawnInterval > specialFishSpawnTime){
+                //50% de chance d'avoir un crabe ou une étoile de mer
                 int rand = randomChoice(seed, 0, 1);
                 if(rand == 1){fishes.add((new Etoile(this)));}
 
@@ -144,8 +151,6 @@ public class Game implements Updatable {
         this.scoreIncrement = 0;
         this.livesIncrement = 0;
 
-        //TODO remove debug, inders performance
-        //System.out.println(fishes.size());
     }
 
     public void addNewFish(){
@@ -169,11 +174,7 @@ public class Game implements Updatable {
     }
 
     public void incrementLives(int increment){
-        this.livesIncrement += increment;
-        //TODO remove debug, inders performance
-        // System.out.println("XXXXXXXXXXXXX");
-        // System.out.println(this.lives);
-        // System.out.println(System.nanoTime()*1e-9);
+
     }
 
     public void incrementLevel(int increment){

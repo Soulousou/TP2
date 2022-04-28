@@ -1,4 +1,10 @@
 package GameModel;
+/**
+ * Fichier : Bulle.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 
 import Utility.Utility;
 
@@ -13,6 +19,7 @@ public class Bulle extends Entity implements Updatable {
         setXY(Utility.randomInterval(game.getRandom(), 0, 640),game.windowHeight+40);
     }
 
+    //Créer les bulles connexes par rapport à la première du groupe
     public Bulle(Game game, Bulle root){
         setGame(game);
 
@@ -23,16 +30,6 @@ public class Bulle extends Entity implements Updatable {
 
     @Override
     public void update(double deltaTime){setXY(posX, getY()-deltaTime*getVY());}
-
-    public void setX(double xi){
-        double xii = 0.0;
-        double rand = Math.random();
-        if(rand < 0.5){xii = xi + 20;}
-
-        else if(rand > 0.5){ xii = xi -20;}
-
-        this.posX = xii;
-    }
 
     public double getRayon(){return this.rayon;}
 

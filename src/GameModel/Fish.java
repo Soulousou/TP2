@@ -1,3 +1,9 @@
+/**
+ * Fichier : Fish.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
 import Utility.Utility;
@@ -12,6 +18,8 @@ public class Fish extends Entity implements Updatable{
     public String colorString;
 
     public Fish(Game game){
+
+        //Determiner si le poisson commence vers la gauche ou la droite
         this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
         double posX=0;
         if(direction < 0){
@@ -31,7 +39,8 @@ public class Fish extends Entity implements Updatable{
         setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
     
-    @Override 
+    @Override
+    //Update la position des poissons en fonction du temps
     public void update(double deltaTime){
         if(getAlive()){
             this.lifeTime += deltaTime;
@@ -46,6 +55,7 @@ public class Fish extends Entity implements Updatable{
         return (getX() - WIDTH/2 <= posX) && (posX <= getX() + WIDTH/2) && (getY() - HEIGHT/2 <= posY) && (posY <= getY() + HEIGHT/2);
     }
 
+    //Verifier que le poisson est dans le cadre du jeu
     public boolean inBounds(){
         boolean inBounds = (getX()+WIDTH/2 >= 0) &&
             (getX()-WIDTH/2 <= getGame().windowWidth) && 
@@ -54,8 +64,9 @@ public class Fish extends Entity implements Updatable{
         return inBounds;
     }
 
+    //Le poisson dépasse les bordures sans avoir été capturé, une vie est enlevée
     public void fallOut(){
-        if(!inBounds() && this.alive){ //fell out w/o being killed by anything else
+        if(!inBounds() && this.alive){
             this.alive = false;
             getGame().incrementLives(-1);
         }

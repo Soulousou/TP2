@@ -1,24 +1,38 @@
+/**
+ * Fichier : LeaderBoard.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package LeaderboardModel;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+
 public class LeaderBoard {
+
     ArrayList<Player> top10;
     Player lastPlayer;
 
     public LeaderBoard(){
         top10 = new ArrayList<>();
 
+        //Lire les données dans le fichier score avec le bon format
         Scanner scan;
         try {
             scan = new Scanner(new File("scores.txt"));
             while(scan.hasNext()){
                 String line = scan.nextLine();
                 try{
+                    //À l'ouverture du fichier, répertorier les joueurs déjà présents
                     Player newLinePlayer = new Player(line);
                     top10.add(newLinePlayer);
                 }catch(BadDataFormat e){
@@ -30,10 +44,12 @@ public class LeaderBoard {
             System.out.println("File not found");
             e.printStackTrace();
         }
+        //Retrier en ordre décroissant et enlever les scores en place supérieur à 10
         top10.sort(Comparator.reverseOrder());
         trimTop10();
     }
 
+    //Ajouter le joueur au leaderbord selon son score
     public boolean addPlayer(Player player){
         this.lastPlayer = player;
         boolean playerAdded = false;
@@ -51,6 +67,7 @@ public class LeaderBoard {
         return playerAdded;
     }
 
+    //Afficher les résultats
     public ArrayList<String> getFormatedScoreStrings(){
         ArrayList<String> formatedScores = new ArrayList<>();
         int index = 1;
@@ -90,6 +107,7 @@ public class LeaderBoard {
         }
     }
 
+    //Enlever les joueurs du leaderbord qui n'ont pas entré de nom
     public void removeUnamed(){
         ListIterator<Player> playerIterator = top10.listIterator();
         while(playerIterator.hasNext()){

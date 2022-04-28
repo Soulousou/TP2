@@ -1,6 +1,12 @@
+/**
+ * Fichier : Crabe.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
+
 package GameModel;
 
-public class Crabe extends Fish{
+public class Crabe extends Fish implements Updatable{
 
     //periode de 0.75, 0.5 premiers forward, 0.25 dernier back
     private final double forwardsTime = 0.5;
@@ -9,19 +15,10 @@ public class Crabe extends Fish{
 
     public Crabe(Game game) {
         super(game);
-        setAY(0.0);
         setVX(1.3*getVX());
         this.colorString = "XXX";
         setUrl("/Image/crabe.png");
 
-    }
-
-    public void avancer(double deltatime) {
-        setXY(posX + getVX() * 0.5 , getY());
-    }
-
-    public void reculer(double deltatime) {
-        setXY(posX + -1*getVX() * 0.25, getY());
     }
 
     @Override

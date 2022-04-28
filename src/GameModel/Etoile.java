@@ -1,5 +1,11 @@
-package GameModel;
+/**
+ * Fichier : Etoile.java
+ * Date: Pour le 29 avril 2022
+ * Auteurs: Maxime Bélanger et Sara Gair
+ */
 
+
+package GameModel;
 import java.lang.Math;
 
 public class Etoile extends Fish {
@@ -21,7 +27,6 @@ public class Etoile extends Fish {
             this.lifeTime += deltaTime;
 
             setXY(getX()+deltaTime*getVX(), this.spawnY+(50*Math.sin(Math.PI*this.lifeTime)));
-            //System.out.print(getY()+ "###");
         }
 
     }
