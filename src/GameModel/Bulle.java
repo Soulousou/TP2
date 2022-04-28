@@ -1,10 +1,10 @@
-package GameModel;
 /**
  * Fichier : Bulle.java
  * Date: Pour le 29 avril 2022
  * Auteurs: Maxime Bélanger et Sara Gair
  */
 
+package GameModel;
 
 import Utility.Utility;
 
