@@ -99,7 +99,7 @@ public class Fish extends Entity implements Updatable{
         this.aY = game.gravity;
 
         setGame(game);
-        this.alive =true;
+        setAlive(true);
         setColor(Utility.getHexColorCode(game.getRandom().nextInt(16777215)));
         setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
