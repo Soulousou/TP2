@@ -6,6 +6,8 @@
 
 package GameModel;
 
+import Utility.Utility;
+
 /**
  * Poisson spécial, se déplace en allant et en retournant horizontalement sans se déplacer verticalement.
  */
@@ -34,21 +36,42 @@ public class Crabe extends Fish{
     /**
      * Constructeur d'un crabe.
      * <p>
+     * {@link #posX}: Choisit aléatoirement la position en X. Soit a droite ou a gauche.
+     * <p>
+     * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
+     * <p>
+     * {@link #vX}: Vitesse en X initiale. (100*{@link #getLevel()}^1/3 + 200)*1.3
+     * 
      * @see Crabe
      * 
      * @param game  Partie avec lequelle le crabe interagiera
      */
     public Crabe(Game game) {
-        super(game);    //TODO: gerer avec un autre constructeur, pose probleme avec colorString et setURL qui doit etre redefini
+        this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
+        this.posX=0;
+        if(this.direction < 0){
+            this.posX = game.windowWidth;
+        }
 
-        this.vX = 1.3*this.vX;
-        this.colorString = "XXX";
+        this.posY = Utility.randomInterval(game.getRandom(), 0.2, 0.8)*game.windowHeight;
+        
+        this.vX = direction*(100*Math.pow(game.getLevel(), (1d/3d))+200)*1.3;
+        this.vY = Utility.randomInterval(game.getRandom(), -100, -200);
+
+        this.aY = game.gravity;
+
+        setGame(game);
+        setAlive(true);
+        setColor("XXX");
         setUrl("/Image/crabe.png");
 
     }
 
     /**
      * Simule le mouvement d'un crabe sur l'intervalle de temps spécifié.
+     * <p>
+     * Un crabe avance et recule en alternance. {@link #forwardsTime} et {@link #periodTime} marquent
+     * les moment ou un crabe change de direction.
      * 
      * @see Updatable
      * 
