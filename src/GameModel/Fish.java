@@ -15,26 +15,26 @@ public class Fish extends Entity implements Updatable{
     protected double lifeTime;
     protected boolean alive;
     protected int direction;
-    public String colorString;
+    protected String colorString;
 
     public Fish(Game game){
         //Determiner si le poisson commence vers la gauche ou la droite
         this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
-        double posX=0;
-        if(direction < 0){
-            posX = game.windowWidth;
+        this.posX=0;
+        if(this.direction < 0){
+            this.posX = game.windowWidth;
         }
 
-        setXY(posX, Utility.randomInterval(game.getRandom(), 0.2, 0.8)*game.windowHeight);
+        this.posY = Utility.randomChoice(game.getRandom(), 0.2, 0.8)*game.windowHeight;
         
-        setVX(direction*(100*Math.pow(game.getLevel(), (1d/3d))+200));
-        setVY(Utility.randomInterval(game.getRandom(), -100, -200));
+        this.vX = direction*(100*Math.pow(game.getLevel(), (1d/3d))+200);
+        this.vY = Utility.randomInterval(game.getRandom(), -100, -200);
 
-        setAY(game.gravity);
+        this.aY = game.gravity;
 
         setGame(game);
         setAlive(true);
-        this.colorString = Utility.getHexColorCode(game.getRandom().nextInt(16777215));
+        setColor(Utility.getHexColorCode(game.getRandom().nextInt(16777215)));
         setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
     
@@ -44,29 +44,30 @@ public class Fish extends Entity implements Updatable{
         if(getAlive()){
             this.lifeTime += deltaTime;
 
-            setVY(getVY() + deltaTime*getAY());
-            setXY(getX()+deltaTime*getVX(), getY()+deltaTime*getVY());
+            this.vY = this.posY + deltaTime*this.aY;
+            this.posX = this.posX+deltaTime*this.vX;
+            this.posY = this.posY + deltaTime*this.vY;
         }
         
     }
 
     public boolean contains(double posX, double posY){
-        return (getX() - WIDTH/2 <= posX) && (posX <= getX() + WIDTH/2) && (getY() - HEIGHT/2 <= posY) && (posY <= getY() + HEIGHT/2);
+        return (this.posX - WIDTH/2 <= posX) && (posX <= this.posX + WIDTH/2) && (this.posY - HEIGHT/2 <= posY) && (posY <= this.posY + HEIGHT/2);
     }
 
     //Verifier que le poisson est dans le cadre du jeu
     public boolean inBounds(){
-        boolean inBounds = (getX()+WIDTH/2 >= 0) &&
-            (getX()-WIDTH/2 <= getGame().windowWidth) && 
-            (getY() - HEIGHT/2 <= getGame().windowHeight) && 
-            (getY() + HEIGHT/2 >= 0);
+        boolean inBounds = (this.posX+WIDTH/2 >= 0) &&
+            (this.posX-WIDTH/2 <= this.game.windowWidth) && 
+            (this.posY - HEIGHT/2 <= this.game.windowHeight) && 
+            (this.posY + HEIGHT/2 >= 0);
         return inBounds;
     }
 
     public void fallOut(){
         if(!inBounds() && this.alive){ //fell out w/o being killed by anything else
             this.alive = false;
-            getGame().incrementLives(-1);
+            this.game.incrementLives(-1);
         }
     }
 
@@ -79,6 +80,14 @@ public class Fish extends Entity implements Updatable{
     }
 
     public int getDirection(){
-        return direction;
+        return this.direction;
+    }
+
+    public String getColor(){return this.colorString;}
+
+    protected void setColor(String color){
+        if(this.colorString == null){
+            this.colorString = color;
+        }
     }
 }
