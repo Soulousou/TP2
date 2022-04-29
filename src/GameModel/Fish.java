@@ -1,24 +1,90 @@
 /**
- * Fichier : Etoile.java
+ * @author Maxime Belanger et Sara Gair
+ * Fichier : Game.java
  * Date: Pour le 29 avril 2022
- * Auteurs: Maxime Bélanger et Sara Gair
+ *
+ * Constructeur et méthode des poissons normaux
+ * Lorsque la partie commence, un poisson apparaît à toutes les 5 secondes
+ * et il se déplace jusqu'à attendre la bordure où il meurt s'il n'est pas éliminé
+ * par le joueur
  */
 
 package GameModel;
 
 import Utility.Utility;
 
+
 public class Fish extends Entity implements Updatable{
+
+/**
+ * Attributs du poisson
+ */
+
+    /**
+     * Hauteur d'un poisson
+     */
     final static public double HEIGHT = 100;
+    /**
+     * Largeur d'un poisson
+     */
     final static public double WIDTH = 100;
-    
+
+    /**
+     * Temps que le poisson est en vie depuis son spawntime
+     */
     protected double lifeTime;
+
+    /**
+     * boolean pour indiquer si le poisson est en vie ou non
+     */
     protected boolean alive;
+
+    /**
+     * Le poisson peut apparaître vers la droite ou la gauche.
+     * Le choix de sa direction est random. 1 signifie que le poisson
+     * apparaît à gauche et se déplace vers la droite en regardant par cette direction.
+     * Le -1 correspond au contraire donc de droite vers la gauche.
+     */
+
     protected int direction;
+
+    /**
+     * correspond à la couleur de l'image qui est aléatoire
+     */
     protected String colorString;
 
+
     public Fish(Game game){
-        //Determiner si le poisson commence vers la gauche ou la droite
+
+        /**
+         * Constructeur du poisson normal
+         *
+         * @param posX Position en X du poisson
+         *             <p>
+         *             La position en X initiale depend de la direction
+         *             @see attribut direction
+         *             </p>
+         * @param posY  Position en Y du poisson
+         *              <p>
+         *              La position initiale en Y est une valeur random entre 0.2 et 0.8
+         *              </p>
+         * @param vX Vitesse X
+         *           <p>
+         *           Elle correspond à cette équation:
+         *           vitesse(level) = 100numeroNiveau**1/3 + 200px/s
+         *           Elle est positive ou negative selon la direction du poisson
+         *           @see attribut direction
+         *           </p>
+         * @param vY Vitesse Y
+         *           <p>
+         *           C'est une vitesse aléatoire entre 100 et 200 pixels/secondes.
+         *           Note: on rajoute le négatif afin que le poisson fasse une trajectoire vers le haut
+         *           </p>
+         * @param ay Accélération en Y
+         *
+         * Par défaut les poisson sont vivants lorsqu'ils sont crées
+         */
+
         this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
         this.posX=0;
         if(this.direction < 0){
@@ -33,13 +99,20 @@ public class Fish extends Entity implements Updatable{
         this.aY = game.gravity;
 
         setGame(game);
-        setAlive(true);
+        this.alive =true;
         setColor(Utility.getHexColorCode(game.getRandom().nextInt(16777215)));
         setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
-    
+
+    /**
+     * Simule le mouvement d'un poisson sur l'intervalle de temps spécifié.
+     *
+     * Les attributs vY, posX et posY changent avec le temps donc ils sont mis à jour
+     * pour que le poisson se déplace dans le jeu
+     *
+     * @param deltaTime Intervalle de temps à simuler
+     */
     @Override
-    //Update la position des poissons en fonction du temps
     public void update(double deltaTime){
         if(getAlive()){
             this.lifeTime += deltaTime;
@@ -51,11 +124,26 @@ public class Fish extends Entity implements Updatable{
         
     }
 
+    /**
+     * Elle permet de vérifier si la balle a touché le poisson en délimitant la surface qu'occupe
+     * poisson dans le jeu
+     * @see Bullet impact()
+     *
+     * @param posX Position en X
+     * @param posY Position en Y
+     *
+     * @return la surface qu'occupe le poisson dans le jeu
+     */
     public boolean contains(double posX, double posY){
         return (this.posX - WIDTH/2 <= posX) && (posX <= this.posX + WIDTH/2) && (this.posY - HEIGHT/2 <= posY) && (posY <= this.posY + HEIGHT/2);
     }
 
-    //Verifier que le poisson est dans le cadre du jeu
+    /**
+     * Vérifie que le poisson est dans le cadre du jeu selon sa
+     * position en X et en Y
+     *
+     * @return un boolean qui indique si le poisson est dans le cadre ou non
+     */
     public boolean inBounds(){
         boolean inBounds = (this.posX+WIDTH/2 >= 0) &&
             (this.posX-WIDTH/2 <= this.game.windowWidth) && 
@@ -64,6 +152,10 @@ public class Fish extends Entity implements Updatable{
         return inBounds;
     }
 
+    /**
+     * Si le poisson est en vie, mais qu'il a dépassé le cadre du jeu,
+     * il est tué et le joueur perd une vie
+     */
     public void fallOut(){
         if(!inBounds() && this.alive){ //fell out w/o being killed by anything else
             this.alive = false;
@@ -71,20 +163,41 @@ public class Fish extends Entity implements Updatable{
         }
     }
 
+    /**
+     * Vérifie que le poisson est en vie et encore dans le cadre du jeu
+     * @return le boolean alive
+     */
     public boolean getAlive(){
         return this.alive && inBounds();
     }
 
+    /**
+     * Change le boolean alive
+     * Elle sert dans la méthode impact() de Bullet
+     * @see Bullet impact()
+     */
     protected void setAlive(boolean alive){
         this.alive = alive;
     }
 
-    public int getDirection(){
-        return this.direction;
-    }
+    /**
+     * Permet de retourner la direction du poisson
+     * afin de le dessiner dans FishHunt drawFish()
+     */
+    public int getDirection(){return this.direction;}
 
+    /**
+     * Permet de retourner la couleur de l'image du poisson
+     * afin de le dessiner dans FishHunt drawFish()
+     */
     public String getColor(){return this.colorString;}
 
+    /**
+     * Permet d'attribuer une couleur au poisson
+     *s'il n'en a pas une
+     *
+     * @param color Couleur attribuée
+     */
     protected void setColor(String color){
         if(this.colorString == null){
             this.colorString = color;
