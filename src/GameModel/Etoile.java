@@ -8,7 +8,7 @@ package GameModel;
 
 import java.lang.Math;
 /**
- * Poisson spécial se déplacant en oscillant verticalement
+ * Poisson spécial se déplaçant en oscillant verticalement
  */
 public class Etoile extends Fish {
 

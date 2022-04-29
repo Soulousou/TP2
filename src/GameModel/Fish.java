@@ -71,7 +71,7 @@ public class Fish extends Entity implements Updatable{
          * @param vX Vitesse X
          *           <p>
          *           Elle correspond à cette équation:
-         *           vitesse(level) = 100numeroNiveau**1/3 + 200px/s
+         *           vitesse(level) = 100numeroNiveau^1/3 + 200px/s
          *           Elle est positive ou negative selon la direction du poisson
          *           @see attribut direction
          *           </p>
@@ -82,7 +82,7 @@ public class Fish extends Entity implements Updatable{
          *           </p>
          * @param ay Accélération en Y
          *
-         * Par défaut les poisson sont vivants lorsqu'ils sont crées
+         * Par défaut les poissons sont vivants lorsqu'ils sont créés
          */
 
         this.direction = Utility.randomChoice(game.getRandom(), -1, 1);

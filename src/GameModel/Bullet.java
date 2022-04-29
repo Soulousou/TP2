@@ -16,12 +16,12 @@ public class Bullet extends Entity implements Updatable {
      */
     private double radius;
     /**
-     * Vitesse en pixels/seconde a laquelle le rayon diminue.
+     * Vitesse en pixels/seconde à laquelle le rayon diminue.
      */
     final private double shrink = 300;
 
     /**
-     * Constructeur d'une balle. On "tire" une balle a la position specifiee en parametres.
+     * Constructeur d'une balle. On "tire" une balle à la position spécifiée en paramètres.
      * 
      * @param posX  Position en X de la balle
      * @param posY  Position en Y de la balle
@@ -37,11 +37,11 @@ public class Bullet extends Entity implements Updatable {
     }
 
     /**
-     * Simule le mouvement d'une balle sur l'intervalle de temps specifie.
+     * Simule le mouvement d'une balle sur l'intervalle de temps spécifié.
      * 
      * @see Updatable
      * 
-     * @param deltaTime Intervalle de temps a simuler
+     * @param deltaTime Intervalle de temps à simuler
      */
     @Override
     public void update(double deltaTime) {
@@ -51,7 +51,7 @@ public class Bullet extends Entity implements Updatable {
     /**
      * Simule l'impact d'une balle.
      * <p>
-     * Detecte si un poisson est touche par la balle et incremente le score
+     * Détecte si un poisson est touché par la balle et incrémente le score
      * accordement.
      */
     protected void impact(){
@@ -66,9 +66,9 @@ public class Bullet extends Entity implements Updatable {
     }
 
     /**
-     * Interface publique pour obtenir l'etat d'une balle.
+     * Interface publique pour obtenir l'état d'une balle.
      * <p>
-     * On classifie un impact au moment ou le rayon de la balle est nul ou negatif.
+     * On classifie un impact au moment où le rayon de la balle est nul ou négatif.
      * <p>
      * Attention de retirer la balle apres un impact.
      * 

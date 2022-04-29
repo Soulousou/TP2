@@ -7,20 +7,20 @@
 package GameModel;
 
 /**
- * Modele general pour tout corps ayant des interactions avec l'instance de {@link #Game} auquel il y est rattache.
+ * Modèle general pour tout corps ayant des interactions avec l'instance de {@link #Game} auquel il y est rattaché.
  */
 public abstract class Entity {
     /**
-     * Instance de {@link #Game} avec lequel l'entite est associee.
+     * Instance de {@link #Game} avec lequel l'entité est associée.
      */
     protected Game game;
 
     /**
-     * Position en X en pixels du centre de l'entite. 
+     * Position en X en pixels du centre de l'entité.
      */
     protected double posX;
     /**
-     * Position en Y en pixels du centre de l'entite.
+     * Position en Y en pixels du centre de l'entité.
      */
     protected double posY;
 
@@ -34,12 +34,12 @@ public abstract class Entity {
     protected double vY;
 
     /**
-     * Acceleration en Y en pixels/seconde^2
+     * Accélération en Y en pixels/seconde^2
      */
     protected double aY;
 
     /**
-     * Url de l'image utilise pour representer l'entite.
+     * Url de l'image utilise pour représenter l'entité.
      */
     protected String url;
 

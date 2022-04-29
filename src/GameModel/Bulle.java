@@ -20,7 +20,7 @@ public class Bulle extends Entity implements Updatable {
 
     public Bulle(Game game) {
         /**
-         * Constructeur d'une bulle. Elle apparait dans le jeu et se deplace vers le haut
+         * Constructeur d'une bulle. Elle apparait dans le jeu et se déplace vers le haut
          *
          * @param rayon Rayon d'une bulle
          *              <p>
@@ -29,11 +29,11 @@ public class Bulle extends Entity implements Updatable {
          * @param vY Vitesse en Y
          *           <p>
          *           La vitesse Y des bulles est une valeur random entre 350 et 450 pixels/secondes
-         *           Note: Pas de vitesse en X, il est constant
+         *           Note: Pas de vitesse en X, elle est constante
          *           </p>
          * @param posX  Position en X de la balle
          *              <p>
-         *              Elle commence a une position random de la largeur de la fenetre
+         *              Elle commence a une position random de la largeur de la fenêtre
          *              </p>
          * @param posY  Position en Y de la balle
          *              <p>
@@ -61,9 +61,9 @@ public class Bulle extends Entity implements Updatable {
         /**
          * Constructeur des autres bulles qui se servent de la bulle root pour la position X
          *
-         * @see constructeur de la bulle root, car les attributs sont similaires a l'exception de
+         * @see constructeur de la bulle root, car les attributs sont similaires à l'exception de
          * posX.
-         * Note: Ils sont redefinis car ils doivent être random pour chaque bulle du groupe de la root
+         * Note: Ils sont redéfinis, car ils doivent être random pour chaque bulle du groupe de la root
          *
          * @param rayon Rayon de la bulle
          * @param vY Vitesse en Y de la bulle
@@ -89,7 +89,7 @@ public class Bulle extends Entity implements Updatable {
      *Méthode qui update la position en Y des bulles par rapport au temps
      * @see interface updatable
      *
-     * @param deltaTime Intervale de temps sur laquelle il faut simuler le prochain etat de la partie
+     * @param deltaTime Intervale de temps sur laquelle il faut simuler le prochain état de la partie
      */
     @Override
     public void update(double deltaTime){
