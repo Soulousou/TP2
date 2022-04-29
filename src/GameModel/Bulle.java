@@ -88,6 +88,10 @@ public class Bulle extends Entity implements Updatable {
         this.posY = this.posY-deltaTime*this.vY;}
 
     /**
+     * Interface publique pour l'acces au rayon d'une bulle.
+     * <p>
+     * Usage graphique.
+     * <p>
      * @return le rayon de la bulle
      */
     public double getRayon(){return this.rayon;}
