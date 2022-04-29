@@ -13,13 +13,12 @@ import javafx.scene.canvas.GraphicsContext;
 public class Controler {
 
     /**
-     * Vue sur le jeu
+     * Instance de {@link #vue} qui affiche les modifications du jeu
      */
     private FishHunt vue;
 
     /**
-     * Partie étant actuellement entamée avec les informations propre
-     * à celle-ci
+     * Instance de {@link #game} avec lequel l'entité est associée.
      */
     private Game game;
 
@@ -88,19 +87,25 @@ public class Controler {
      * Permet de contrôler les dessins du jeu selon la méthode update qui, elle, change les positions des
      * objets
      * @see Updatable
-     *
+     *<p>
      * @param dt La différence de temps écoulé entre le début et le temps actuel
-     *
+     *<p>
      * drawCurseur dessine le curseur en fonction du temps et de la position x,y de celui-ci
+     * <p>
      * drawGamHUD dessine les composantes du jeu(score, vie(s) restante(s), niveau actuel)
+     * <p>
      * drawfish dessine un poisson (normal/spécial) avec ces composantes en x,y, l'image, la couleur de
      *           l'image et sa direction
+     * <p>
      * drawbullet dessine la cible avec ses composantes x,y et son rayon
+     * <p>
      * drawbulle  dessine une bulle avec ses composantes x,y et son rayon
 
      */
 
     public void updateGame(double dt, GraphicsContext context){
+
+
         game.update(dt);
 
         vue.drawCursor(this.cursorX, this.cursorY, context);
