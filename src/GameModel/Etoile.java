@@ -21,15 +21,18 @@ public class Etoile extends Fish {
 
         /**
          * Constructeur d'une étoile
-         * @param game  Partie avec lequelle le crabe interagiera
-         * @param colorString
+         * <p>
+         * @param Game  Partie avec lequelle le crabe interagiera
+         *<p>
+         * {@link #colorString}
          *       <p> La méthode qui dessine les poissons utilise un regex
          *           On attribue un regex qui ne match pas celle-ci afin que l'étoile garde
          *           sa couleur initiale
          *           @see drawFish dans FishHunt
          *           </p>
-         * @param Url Url de l'image de l'étoile
-         * @param spawnY Position initiale en Y de l'étoile
+         * @param Url  lien url de l'image de l'étoile
+         * <p>
+         * {@link #spawnY} Position initiale en Y de l'étoile
          */
 
         super(game);
