@@ -1,7 +1,9 @@
 /**
- * Fichier : FishHunt.java
+ * @author Maxime Belanger et Sara Gair
+ * Fichier : Fish.java
  * Date: Pour le 29 avril 2022
- * Auteurs: Maxime Bélanger et Sara Gair
+ *
+ * Main fichier du jeu FishHunt
  */
 
 import javafx.animation.AnimationTimer;

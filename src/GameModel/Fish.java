@@ -63,7 +63,7 @@ public class Fish extends Entity implements Updatable{
          * <p>
          * {@link #vX}: Vitesse en X initiale. 100*{@link #getLevel()}^1/3 + 200
          * <p>
-         * {@link #vY}: Choisit aleatoirement la vitesse en Y initiale. [100; 200] vers le bas.
+         * {@link #vY}: Choisit aleatoirement la vitesse en Y initiale. [100; 200]
          * 
          * @param game  Partie avec laquelle le poisson interagiera
          */
