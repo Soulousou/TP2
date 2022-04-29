@@ -48,7 +48,7 @@ public class Controler {
         vue.drawGameHUD(game.getScore(), game.getLives(), game.getLevel(), game.getGrace(), context);
 
         for(Fish fish : game.getFishes()){
-            vue.drawFish(fish.getX(), fish.getY(), fish.WIDTH, fish.HEIGHT, fish.getUrL(), fish.colorString, fish.getDirection() < 0, context);
+            vue.drawFish(fish.getX(), fish.getY(), fish.WIDTH, fish.HEIGHT, fish.getUrL(), fish.getColor(), fish.getDirection() < 0, context);
         }
 
         for(Bullet bullet : game.getBullets()){
