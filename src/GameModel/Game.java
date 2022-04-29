@@ -18,7 +18,7 @@ import static Utility.Utility.randomChoice;
 /**
  * Represente une partie du jeu FishHunt.
  * <p>
- * {@link #update()} simule le deroulement de la partie.
+ * {@link Game#update(double)}  simule le déroulement de la partie.
  */
 public class Game implements Updatable {
     //Random
@@ -39,29 +39,29 @@ public class Game implements Updatable {
      */
     final protected double windowHeight;
     /**
-     * Valeur en pixels/seconde^2 de l'acceleration vers le bas.
+     * Valeur en pixels/seconde^2 de l'accélération vers le bas.
      */
     final protected double gravity = 100;
 
     //Timer
     /**
-     * Temps depuis le debut d'un etat de grace.
+     * Temps depuis le debut d'un état de grace.
      */
     private double graceTimer;
     /**
-     * Constante de la duree d'une periode de grace.
+     * Constante de la durée d'une période de grace.
      */
     final protected double graceTime = 3;
     /**
-     * Temps depuis le debut d'un etat "GAME OVER".
+     * Temps depuis le debut d'un état "GAME OVER".
      */
     private double looseTimer;
     /**
-     * Constante de la duree maximale d'un etat "GAME OVER".
+     * Constante de la durée maximale d'un état "GAME OVER".
      */
     final protected double looseTime = 3;
     /**
-     * Temps depuis la derniere apparition d'un poisson normal.
+     * Temps depuis la dernière apparition d'un poisson normal.
      */
     private double normalFishSpawnInterval;
     /**
@@ -69,7 +69,7 @@ public class Game implements Updatable {
      */
     final protected double normalFishSpawnTime = 3;
     /**
-     * Temps depuis la derniere apparition d'un poisson special.
+     * Temps depuis la dernière apparition d'un poisson special.
      */
     private double specialFishSpawnInterval;
     /**
@@ -77,11 +77,11 @@ public class Game implements Updatable {
      */
     final protected double specialFishSpawnTime = 3;
     /**
-     * Temps depuis la derniere apparition d'un groupe de bulles.
+     * Temps depuis la dernière apparition d'un groupe de bulles.
      */
     private double bulleSpawnInterval;
     /**
-     * Constante de l'intervalle de temps entre l'apparition de deux groupe de bulles.
+     * Constante de l'intervalle de temps entre l'apparition de deux groupes de bulles.
      */
     final protected double bulleSpawnTime = 3;
 
@@ -93,7 +93,7 @@ public class Game implements Updatable {
      */
     private int levelScore;
     /**
-     * Quantite de points viruels a ajouter au {@link #levelScore} pendant un cycle d'{@link #update()}.
+     * Quantite de points viruels a ajouter au {@link #levelScore} pendant un cycle d'{@Link Game#update(double)}.
      */
     private int levelScoreIncrement;
     /**
@@ -109,9 +109,9 @@ public class Game implements Updatable {
      */
     private int lives;
     /**
-     * Nombre de vies a ajouter aux {@link #lives} pendant un cycle d'{@link #update()}.
+     * Nombre de vies a ajouter aux {@link #lives} pendant un cycle d'{@link Game#update(double)}.
      * <p>
-     * Seule source possible est de la fonction debug {@link #incrementLives()}.
+     * Seule source possible est de la fonction debug {@see incrementLives()}.
      */
     private int livesIncrement;
     /**
@@ -119,7 +119,7 @@ public class Game implements Updatable {
      */
     private int score;
     /**
-     * Nombre de points a ajouter au {@link #score} pendant un cycle d'{@link #update()}.
+     * Nombre de points à ajouter au {@link #score} pendant un cycle d'{@link Game#update(double)}.
      */
     private int scoreIncrement;
 
@@ -127,19 +127,19 @@ public class Game implements Updatable {
     /**
      * Ensemble des poissons vivants et actifs dans la partie.
      * <p>
-     * {@link #LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link #remove()}.
+     * {@link LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link java.util.LinkedList#remove()}.
      */
     private LinkedList<Fish> fishes;
     /**
      * Ensemble des balles en vol dans la partie.
      * <p>
-     * {@link #LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link #remove()}.
+     * {@link LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link java.util.LinkedList#remove()}.
      */
     private LinkedList<Bullet> bullets;
     /**
      * Ensemble des bulles visibles dans la zone de la partie.
      * <p>
-     * {@link #LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link #remove()}.
+     * {@link LinkedList} est utilise pour reduire le temps d'execution des nombreuses operations {@link java.util.LinkedList#remove()}.
      */
     private LinkedList<Bulle> bulles;
 
@@ -165,14 +165,14 @@ public class Game implements Updatable {
     }
 
     /**
-     * Update les proprietes de toutes les entites presentes dans une partie.
+     * Update les propriétés de toutes les entités présentes dans une partie.
      * <p>
-     * S'occupe d'updater: la position, les colisions, l'apparition de nouveux poissons,
-     * enlever les entites mortes et les statistiques.
+     * S'occupe d'updater: la position, les collisions, l'apparition de nouveaux poissons,
+     * enlever les entités mortes et les statistiques.
      * <p>
-     * Dans l'ordre: Mouvement -> Colision -> Ajout -> Retirer -> Statistiques
+     * Dans l'ordre: Mouvement -> Collision -> Ajout -> Retirer -> Statistiques
      * 
-     * @param dt Intervale de temps sur laquelle il faut simuler le prochain etat de la partie
+     * @param dt Intervalle de temps sur laquelle il faut simuler le prochain état de la partie
      */
     @Override
     public void update(double dt){
@@ -306,35 +306,35 @@ public class Game implements Updatable {
     }
 
     /**
-     * Interface publique pour l'incrementation du score.
+     * Interface publique pour l'incrémentation du score.
      * <p>
      * !DEBUG!
      * 
-     * @param increment Quantite de points a ajouter
+     * @param increment Quantité de points à ajouter
      */
     public void incrementScore(int increment){
         this.scoreIncrement += increment;
     }
 
     /**
-     * Interface publique pour l'incrementation des vies.
+     * Interface publique pour l'incrémentation des vies.
      * <p>
      * !DEBUG!
      * 
-     * @param increment Quantite de vies a ajouter
+     * @param increment Quantité de vies à ajouter
      */
     public void incrementLives(int increment){
         this.livesIncrement += increment;
     }
 
     /**
-     * Interface publique pour l'incrementation du niveau.
+     * Interface publique pour l'incrémentation du niveau.
      * <p>
      * !DEBUG!
      * <p> 
-     * Augmente le niveau independament du score.
+     * Augmente le niveau indépendament du score.
      * 
-     * @param increment Nombre de niveau a ajouter
+     * @param increment Nombre de niveau à ajouter
      */
     public void incrementLevel(int increment){
         //Additionne le score virtuel manquant pour passer au prochain niveau.
@@ -343,7 +343,7 @@ public class Game implements Updatable {
     }
 
     /**
-     * Interface publique pour l'obtention de l'etat de la randomisation.
+     * Interface publique pour l'obtention de l'état de la randomisation.
      * 
      * @return  Le randomiseur de la partie
      */
@@ -379,11 +379,11 @@ public class Game implements Updatable {
     }
 
     /**
-     * Interface publique pour connaitre l'etat de grace de la partie.
+     * Interface publique pour connaitre l'état de grace de la partie.
      * <p>
-     * Un etat de grace signifie une transition de niveau ou une periode de "GAME OVER".
+     * Un état de grace signifie une transition de niveau ou une période de "GAME OVER".
      * <p>
-     * Pour savoir si une partie est terminee, utiliser {@link #getLoss()}
+     * Pour savoir si une partie est terminée, utiliser {@link #getLoss()}
      * @return  Si la partie est en grace
      */
     public boolean getGrace(){
@@ -393,7 +393,7 @@ public class Game implements Updatable {
     /**
      * Interface publique pour savoir si une partie est finie.
      * <p>
-     * Devient vrai APRES la periode de grace pour un "GAME OVER", utile pour savoir si la partie doit etre "terminated" par le controleur.
+     * Devient vrai APRES la période de grace pour un "GAME OVER", utile pour savoir si la partie doit être "terminated" par le controleur.
      * <p>
      * Relation d'implication:
      * {@link #getLoss()} => {@link #getGrace()}
@@ -407,7 +407,6 @@ public class Game implements Updatable {
     /**
      * Interface publique pour obtenir l'ensemble des poissons vivants.
      * <p>
-     * FIXME: La reference a la liste retournee permet quand meme de modifier son contenu.
      * 
      * @return  L'ensemble des poissons vivants
      */

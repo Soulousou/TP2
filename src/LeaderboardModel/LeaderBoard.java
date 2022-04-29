@@ -3,7 +3,6 @@
  * Fichier : LeaderBoard.java
  * Date: Pour le 29 avril 2022
  *
- * Gestion du leaderboard et de son affichage
  */
 
 package LeaderboardModel;
@@ -18,7 +17,9 @@ import java.util.Comparator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-
+/**
+ * Gestion du leaderboard et de son affichage
+ */
 public class LeaderBoard {
 
     /**
@@ -34,9 +35,9 @@ public class LeaderBoard {
      * Lire les données dans le fichier scores.txt avec le bon format.
      * <p>
      * A chaque lecture du fichier, uniquement obtenable par l'instanciation d'un {@link LeaderBoard},
-     * les donnees contenues dans le fichier ont leur format verifie et sont classes grace a l'interface {@link Comparable}.
+     * les donnees contenues dans le fichier ont leur format vérifie et sont classes grace a l'interface {@link Comparable}.
      * <p>
-     * L'idee est d'avoir un modele en memoire infaillible qui represente l'entierete du leaderboard du jeu.
+     * L'idée est d'avoir un modèle en memoire infaillible qui représente l'entièrete du leaderboard du jeu.
      */
     public LeaderBoard(){
         top10 = new ArrayList<>();
@@ -124,8 +125,8 @@ public class LeaderBoard {
     }
 
     /**
-     * Interface permettant de nommer le joueur sans nom genere automatiquement 
-     * (avant qu'il ait pu donne son nom) a la fin d'une partie.
+     * Interface permettant de nommer le joueur sans nom genère automatiquement
+     * (avant qu'il ait pu donner son nom) a la fin d'une partie.
      * 
      * @param name Le nom qui sera donne au {@link #lastPlayer}
      */

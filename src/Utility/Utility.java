@@ -3,14 +3,14 @@ package Utility;
 import java.util.Random;
 
 /**
- * Classe fournissant divers utilites uses dans ce projet.
+ * Classe fournissant diverses méthodes utiles dans ce projet.
  * <p>
- * L'idee est de combiner les fonction inclassables utilisees dans le projet.
+ * L'idee est de combiner les fonctions inclassables utilisées dans le projet.
  */
 public class Utility {
 
     /**
-     * Genere un nombre aleatoire compris dans les bornes specifiees.
+     * Genere un nombre aleatoire compris dans les bornes spécifiées.
      * 
      * @param seed  Randomiseur qui permetra de generer le prochain nombre
      * @param lower Borne inferieure inclusive

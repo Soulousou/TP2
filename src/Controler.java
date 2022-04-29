@@ -26,7 +26,7 @@ public class Controler {
     private Game game;
 
     /**
-     * Instance de {@link Leaderboard} qui represente le leaderboard propre a cette insallation du jeu.
+     * Instance de {@link LeaderBoard} qui représente le leaderboard propre a cette installation du jeu.
      */
     private LeaderBoard leaderBoard;
 

@@ -25,9 +25,9 @@ public class Etoile extends Fish {
      * <p>
      * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
      * <p>
-     * {@link #vX}: Vitesse en X initiale. 100*{@link #getLevel()}^1/3 + 200
+     * {@link #vX}: Vitesse en X initiale. 100*{@link Game#getLevel()}^1/3 + 200
      * 
-     * @param game  Partie avec lequelle l'etoile de mer interagiera
+     * @param game  Partie avec lequelle l'étoile de mer interagiera
      */
     public Etoile(Game game) {
 
