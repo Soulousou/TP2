@@ -39,6 +39,8 @@ public class Bullet extends Entity implements Updatable {
     /**
      * Simule le mouvement d'une balle sur l'intervalle de temps specifie.
      * 
+     * @see Updatable
+     * 
      * @param deltaTime Intervalle de temps a simuler
      */
     @Override
