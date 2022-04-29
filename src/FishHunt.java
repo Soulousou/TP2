@@ -49,12 +49,12 @@ public class FishHunt extends Application{
     /**
      * Largeur de la fenêtre
      */
-    public final int w = 640;
+    public final int windowWidth = 640;
 
     /**
      * Hauteur de la fenêtre
      */
-    public final int h = 480;
+    public final int windowHeight = 480;
 
 
     /**
@@ -75,7 +75,9 @@ public class FishHunt extends Application{
         this.stage.setResizable(false);
     }
 
-
+    /**
+     * Methode qui affiche la scene du menu.
+     */
     public void menu(){
 
         /**
@@ -88,7 +90,7 @@ public class FishHunt extends Application{
          * Conteneur principal de tous les éléments visuels
          */
         StackPane pane = new StackPane();
-        Scene menu = new Scene(pane, w, h);
+        Scene menu = new Scene(pane, windowWidth, windowHeight);
 
         /**
          * Vbox qui contient le background du jeu (couleur et logo du jeu FishHunt)
@@ -145,7 +147,9 @@ public class FishHunt extends Application{
         this.stage.setScene(menu);
     }
 
-
+    /**
+     * Methode qui affiche la scene de jeu.
+     */
     public void gameScene(){
 
         /**
@@ -159,9 +163,9 @@ public class FishHunt extends Application{
          * la scène du jeu
          */
         Pane pane = new Pane();
-        Scene gameScene = new Scene(pane, w, h);
+        Scene gameScene = new Scene(pane, windowWidth, windowHeight);
 
-        Canvas ocean = new Canvas(w, h);
+        Canvas ocean = new Canvas(windowWidth, windowHeight);
         pane.getChildren().add(ocean);
 
         pane.setBackground(new Background( new BackgroundFill(Color.web("#00008B"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -192,7 +196,7 @@ public class FishHunt extends Application{
                     lastTime = now;
                     return;
                 }
-                context.clearRect(0, 0, w, h);
+                context.clearRect(0, 0, windowWidth, windowHeight);
                 double deltaTime = (now - lastTime) * 1e-9;
                 controler.updateGame(deltaTime, context);
                 lastTime = now;
@@ -266,7 +270,7 @@ public class FishHunt extends Application{
     }
 
     /**
-     * Affiche la scène du leaderboard après une partie
+     * Affiche la scène du leaderboard lorsqu'il faut ajouter un nouveau score.
      */
     public void leaderBoardScene(int score, ArrayList<String> bestScores){
         try {animation.stop();} catch (Exception e) {}
@@ -277,7 +281,7 @@ public class FishHunt extends Application{
         VBox root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
         root.setSpacing(20);
-        Scene scene = new Scene(root, w, h);
+        Scene scene = new Scene(root, windowWidth, windowHeight);
 
         /**
          * Titre de la scène Meilleurs Scores
@@ -292,8 +296,8 @@ public class FishHunt extends Application{
          * @see LeaderboardModel.LeaderBoard#top10
          */
         ListView<String> board = new ListView<>();
-        board.setMaxWidth(w*0.9);
-        double boardHeight = h*0.7;
+        board.setMaxWidth(windowWidth*0.9);
+        double boardHeight = windowHeight*0.7;
         board.setMaxHeight(boardHeight+2); //+2 to prevent scrollbar
         board.setFixedCellSize(boardHeight/10);
         board.getItems().setAll(bestScores);
@@ -352,7 +356,7 @@ public class FishHunt extends Application{
     }
 
     /**
-     * Affiche la scène du leaderboard après l'ajout de nom
+     * Affiche la scène du leaderboard après sans qu'il y ait l'ajout d'un nom.
      */
     public void leaderBoardScene(ArrayList<String> bestScores){
         try {animation.stop();} catch (Exception e) {}
@@ -363,7 +367,7 @@ public class FishHunt extends Application{
         VBox root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
         root.setSpacing(20);
-        Scene scene = new Scene(root, w, h);
+        Scene scene = new Scene(root, windowWidth, windowHeight);
 
         /**
          * Titre de la scène
@@ -377,8 +381,8 @@ public class FishHunt extends Application{
          * ListView permet d'afficher l'ArrayList top10
          */
         ListView<String> board = new ListView<>();
-        board.setMaxWidth(w*0.9);
-        double boardHeight = h*0.7;
+        board.setMaxWidth(windowWidth*0.9);
+        double boardHeight = windowHeight*0.7;
         board.setMaxHeight(boardHeight+2); //+2 to prevent scrollbar
         board.setFixedCellSize(boardHeight/10);
         board.getItems().setAll(bestScores);
@@ -402,19 +406,19 @@ public class FishHunt extends Application{
     }
 
     /**
-     * @return w
-     * @see FishHunt#w
+     * Interface publique pour l'obtention de la {@link #windowWidth}
+     * @return {@link #windowWidth}
      */
     public double getWidth(){
-        return w;
+        return windowWidth;
     }
 
     /**
-     * @return h
-     * @see FishHunt#h
+     * Interface publique pour l'obtention de la {@link #windowHeight}
+     * @return {@link #windowHeight}
      */
     public double getHeight(){
-        return h;
+        return windowHeight;
     }
 
     /**
@@ -422,7 +426,7 @@ public class FishHunt extends Application{
      * @param posX Position en X
      * @param posY Position en Y
      * @param context l'élément graphique
-     * {@link GraphicsContext}
+     * @see GraphicsContext
      */
     public void drawCursor(double posX, double posY, GraphicsContext context){
         Image cible = new Image("/Image/cible.png", 50, 50, true, false);
@@ -431,13 +435,15 @@ public class FishHunt extends Application{
 
     /**
      * Affiche les éléments du jeu(score, vies, niveau)
+     * 
      * @param score Score actuel
      * @param lives vies restantes
      * @param level niveau actuel
      * @param isGrace boolean pour connaître l'état de transition
+     * @param context Contexte graphique de la scene
+     * 
      * @see Game#getGrace()
-     *
-     * {@link GraphicsContext}
+     * @see GraphicsContext
      */
     public void drawGameHUD(int score, int lives, int level, boolean isGrace, GraphicsContext context){
         
@@ -449,7 +455,7 @@ public class FishHunt extends Application{
          * @param score
          */
         context.setFont(new Font(35));;
-        context.fillText(""+score, this.w/2, this.h/10);
+        context.fillText(""+score, this.windowWidth/2, this.windowHeight/10);
 
 
         /**
@@ -457,8 +463,8 @@ public class FishHunt extends Application{
          * @param lives
          */
         Image livesIcon = new Image("/Image/fish/00.png", 30, 30, true, false);
-        double iconCenterX = this.w/2 - livesIcon.getWidth()/2;
-        double iconCenterY = this.h/7 - livesIcon.getHeight()/2;
+        double iconCenterX = this.windowWidth/2 - livesIcon.getWidth()/2;
+        double iconCenterY = this.windowHeight/7 - livesIcon.getHeight()/2;
         double gap = 10;
         for(int i =0; i<lives; i++){
             context.drawImage(livesIcon, iconCenterX+(gap+livesIcon.getWidth())*(i-1), iconCenterY);
@@ -470,7 +476,7 @@ public class FishHunt extends Application{
          */
         if(isGrace && lives > 0){
             context.setFont(new Font(70));
-            context.fillText("Level "+ level, this.w/2, this.h/2);
+            context.fillText("Level "+ level, this.windowWidth/2, this.windowHeight/2);
         }
 
         /**
@@ -480,7 +486,7 @@ public class FishHunt extends Application{
         if(lives <= 0){
             context.setFill(Color.RED);
             context.setFont(new Font(70));
-            context.fillText("Game Over", this.w/2, this.h/2);
+            context.fillText("Game Over", this.windowWidth/2, this.windowHeight/2);
         }
     }
 
@@ -490,6 +496,7 @@ public class FishHunt extends Application{
      * @param posY Position en Y
      * @param radius rayon de la cible
      * @param context élément graphique de la cible
+     * 
      * @see GameModel.Bullet
      */
     public void drawBullet(double posX, double posY,double radius, GraphicsContext context){
@@ -499,6 +506,7 @@ public class FishHunt extends Application{
 
     /**
      * Dessine le poisson
+     * 
      * @param posX Position en X
      * @param posY Position en Y
      * @param width La largeur du poisson
@@ -506,8 +514,10 @@ public class FishHunt extends Application{
      * @param url Lien url de l'image du poisson
      * @param color couleur de l'image à afficher
      * @param flop Inversion verticale d'une image
-     * @see Utility.ImageHelpers#flop(Image)
+     * 
      * @param context élément graphique de la cible
+     * 
+     * @see Utility.ImageHelpers#flop(Image)
      * @see GameModel.Fish
      */
     public void drawFish(double posX, double posY, double width, double height, String url, String color, boolean flop, GraphicsContext context){
@@ -521,10 +531,12 @@ public class FishHunt extends Application{
 
     /**
      * Dessine une bulle
+     * 
      * @param posX Position en X
      * @param posY Position en Y
      * @param rayon rayon de la cible
      * @param context élément graphique de la cible
+     * 
      * @see GameModel.Bulle
      */
     public void drawBulle(double posX, double posY,double rayon, GraphicsContext context) {
