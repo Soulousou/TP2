@@ -109,20 +109,35 @@ public class FishHunt extends Application{
         vertical.setSpacing(10);
 
         pane.getChildren().add(vertical);
-        
+
+        /**
+         * Logo du jeu
+         */
         Image logoImage = new Image("/Image/logo.png");
         vertical.getChildren().add(new ImageView(logoImage));
-        
+
+        /**
+         * Bouton pour démarrer une nouvelle partie
+         */
         Button newGameButton = new Button("Nouvelle Partie!");
         vertical.getChildren().add(newGameButton);
 
+        /**
+         * Bouton pour accéder au leaderboard
+         */
         Button bestScoreButton = new Button("Meilleurs Scores");
         vertical.getChildren().add(bestScoreButton);
 
+        /**
+         * @see Controler#goToLeaderBoard()
+         */
         bestScoreButton.setOnAction((action) -> {
             this.controler.goToLeaderBoard();
         });
 
+        /**
+         * @see Controler#startGame()
+         */
         newGameButton.setOnAction((action -> {
             this.controler.startGame();
         }));
@@ -130,20 +145,6 @@ public class FishHunt extends Application{
         this.stage.setScene(menu);
     }
 
-
-    /**
-     * Vbox qui contient le background du jeu (couleur et logo du jeu FishHunt)
-     * <p>
-     *     Vbox contient aussi le bouton Nouvelle Partie qui permet
-     *     l'event startGame()
-     * @see Controler startGame()
-     * </p>
-     * <p>
-     *      Vbox contient aussi le bouton Meilleurs Scores qui permet
-     *      d'accéder au visuel du leaderboard
-     *      @see Controler goToLeaderBoard()
-     *</p>
-     */
 
     public void gameScene(){
 
