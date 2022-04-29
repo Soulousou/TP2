@@ -17,32 +17,25 @@ public class Bulle extends Entity implements Updatable {
      */
     final private double rayon;
 
-
+    /**
+     * Constructeur d'une bulle. Elle apparait dans le jeu et se déplace vers le haut.
+     * <p>
+     * Cette version du constructeur sert a initier un groupe de bulle sur lesquelle elles
+     * se baseront sur celle-ci pour se disperser.
+     * <p>
+     * {@link #rayon}: Rayon choisit aleatoirement. [10; 40]
+     * <p>
+     * {@link #vY}: Vitesse en Y choisit aleatoirement. [350; 450]
+     * <p>
+     * {@link #posX}: Position en X choisit aleatoirement. [0, {@link Game #windowWidth}]
+     * <p>
+     * {@link #posY}: Position en Y de la balle. 40px en dessous de la zone de jeu.
+     * <p>
+     * @see #Bulle(Game, Bulle)
+     *
+     * @param game  Partie avec laquelle la bulle interagiera
+     */
     public Bulle(Game game) {
-        /**
-         * Constructeur d'une bulle. Elle apparait dans le jeu et se déplace vers le haut
-         *
-         * @param rayon Rayon d'une bulle
-         *              <p>
-         *              Le rayon des bulles est une valeur random entre 10 et 40 pixels
-         *              </p>
-         * @param vY Vitesse en Y
-         *           <p>
-         *           La vitesse Y des bulles est une valeur random entre 350 et 450 pixels/secondes
-         *           Note: Pas de vitesse en X, elle est constante
-         *           </p>
-         * @param posX  Position en X de la balle
-         *              <p>
-         *              Elle commence a une position random de la largeur de la fenêtre
-         *              </p>
-         * @param posY  Position en Y de la balle
-         *              <p>
-         *               Afin que les bulles commencent vers le bas, elles commencent à la hauteur + le rayon
-         *               maximal qu'elles peuvent avoir, soit 40.
-         *              </p>
-         *
-         * @param game  Partie avec laquelle la bulle interagiera
-         */
 
         setGame(game);
 
@@ -51,49 +44,48 @@ public class Bulle extends Entity implements Updatable {
         this.vY = Utility.randomInterval(game.getRandom(), 350, 450);
 
         this.posX = Utility.randomInterval(game.getRandom(), 0, 640);
+
         this.posY = game.windowHeight+40;
     }
 
-
+    /**
+     * Constructeur des autres bulles qui se servent de la bulle root pour la position X.
+     * <p>
+     * Cette version permet de d'ajouter des bulles en "cluster" autour d'une bulle root.
+     * <p>
+     * {@link #rayon}: Rayon choisit aleatoirement. [10; 40]
+     * <p>
+     * {@link #vY}: Vitesse en Y choisit aleatoirement. [350; 450]
+     * <p>
+     * {@link #posX}: Position en X choisit aleatoirement a proximite de la bulle initiale. (+/- 20)
+     * <p>
+     * {@link #posY}: Position en Y de la balle. 40px en dessous de la zone de jeu.
+     * <p>
+     * @see #Bulle(Game)
+     *
+     * @param game  Partie avec laquelle la bulle interagiera
+     * @param root  Bulle "racine" sur laquelle cette bulle se base.
+     */
     public Bulle(Game game, Bulle root){
         setGame(game);
-
-        /**
-         * Constructeur des autres bulles qui se servent de la bulle root pour la position X
-         *
-         * @see constructeur de la bulle root, car les attributs sont similaires à l'exception de
-         * posX.
-         * Note: Ils sont redéfinis, car ils doivent être random pour chaque bulle du groupe de la root
-         *
-         * @param rayon Rayon de la bulle
-         * @param vY Vitesse en Y de la bulle
-         * @param posX Position en X de la bulle
-         *             <p>
-         *                Elles auront une position X qui est soit + ou - 20 pixels par rapport à la position en X
-         *                de la bulle root.
-         *                Note: le plus ou moins est random
-         *             </p>
-         * @param posY Position en Y de la bulle
-         */
-
 
         this.rayon = Utility.randomInterval(game.getRandom(), 10, 40);
 
         this.vY = Utility.randomInterval(game.getRandom(), 350, 450);
 
-        this.posX = root.getX() + Utility.randomInterval(game.getRandom(), -20, 20);
+        this.posX = root.posX + Utility.randomInterval(game.getRandom(), -20, 20);
         this.posY = game.windowHeight+40;
     }
 
     /**
-     *Méthode qui update la position en Y des bulles par rapport au temps
-     * @see interface updatable
+     *Méthode qui update la position en Y des bulles par rapport au temps.
+     * @see Updatable
      *
      * @param deltaTime Intervale de temps sur laquelle il faut simuler le prochain état de la partie
      */
     @Override
     public void update(double deltaTime){
-        this.posY = getY()-deltaTime*getVY();}
+        this.posY = this.posY-deltaTime*this.vY;}
 
     /**
      * @return le rayon de la bulle
