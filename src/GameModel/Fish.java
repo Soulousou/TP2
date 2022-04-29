@@ -54,36 +54,21 @@ public class Fish extends Entity implements Updatable{
     protected String colorString;
 
 
-    public Fish(Game game){
-
-        /**
-         * Constructeur du poisson normal
-         *
-         * @param posX Position en X du poisson
-         *             <p>
-         *             La position en X initiale depend de la direction
-         *             @see attribut direction
-         *             </p>
-         * @param posY  Position en Y du poisson
-         *              <p>
-         *              La position initiale en Y est une valeur random entre 0.2 et 0.8
-         *              </p>
-         * @param vX Vitesse X
-         *           <p>
-         *           Elle correspond à cette équation:
-         *           vitesse(level) = 100numeroNiveau^1/3 + 200px/s
-         *           Elle est positive ou negative selon la direction du poisson
-         *           @see attribut direction
-         *           </p>
-         * @param vY Vitesse Y
-         *           <p>
-         *           C'est une vitesse aléatoire entre 100 et 200 pixels/secondes.
-         *           Note: on rajoute le négatif afin que le poisson fasse une trajectoire vers le haut
-         *           </p>
-         * @param ay Accélération en Y
-         *
-         * Par défaut les poissons sont vivants lorsqu'ils sont créés
+    /**
+         * Constructeur d'un poisson normal.
+         * <p>
+         * {@link #posX}: Choisit aléatoirement la position en X. Soit a droite ou a gauche.
+         * <p>
+         * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
+         * <p>
+         * {@link #vX}: Vitesse en X initiale. 100*{@link #getLevel()}^1/3 + 200
+         * <p>
+         * {@link #vY}: Choisit aleatoirement la vitesse en Y initiale. [100; 200]
+         * 
+         * @param game  Partie avec laquelle le poisson interagiera
          */
+
+    public Fish(Game game){
 
         this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
         this.posX=0;
@@ -103,6 +88,11 @@ public class Fish extends Entity implements Updatable{
         setColor(Utility.getHexColorCode(game.getRandom().nextInt(16777215)));
         setUrl("/Image/fish/0" + game.getRandom().nextInt(8)+ ".png");
     }
+
+    /**
+     * Constructeur vide pour statisfaire un appel {@code super()}
+     */
+    protected Fish(){}
 
     /**
      * Simule le mouvement d'un poisson sur l'intervalle de temps spécifié.
