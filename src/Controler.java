@@ -10,40 +10,46 @@ import GameModel.*;
 import LeaderboardModel.*;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * Connexion entre une interface graphique {@link FishHunt}, une simulation {@link Game} ainsi que la representation d'un {@link LeaderBoard}.
+ */
 public class Controler {
 
     /**
-     * Instance de {@link #vue} qui affiche les modifications du jeu
+     * Instance de {@link FishHunt} qui represente l'interface graphique du programme.
      */
     private FishHunt vue;
 
     /**
-     * Instance de {@link #game} avec lequel l'entité est associée.
+     * Instance de {@link Game} qui sert de simulation du gameplay.
      */
     private Game game;
 
     /**
-     * Leaderboard actuel qui sera update avec les informations du joueur actuel
+     * Instance de {@link Leaderboard} qui represente le leaderboard propre a cette insallation du jeu.
      */
     private LeaderBoard leaderBoard;
 
     /**
-     * Position du curseur en X
+     * Position du curseur en X.
      */
     private double cursorX;
 
     /**
-     * Position du curseur en Y
+     * Position du curseur en Y.
      */
     private double cursorY;
 
     /**
-     * Contrôler la vue avec les méthodes ci-dessus
-     * et initialiser un nouveau leaderbord qui sera update
-     * avec le joueur récent
+     * Constructeur d'une toile Vue-Controleur-Modele.
+     * <p>
+     * Doit etre appele au debut de la sequence de lancement de {@link FishHunt}.
+     * <p>
+     * Initialise un {@link LeaderBoard} qui s'occupera d'ajouter et de montrer
+     * les joueur y faisant partie.
      *
-     * @param vue Vue du jeu qui sera changé dépendamment
-     *            des méthodes employées par le joueur
+     * @param vue Interface graphique avec lequel le controleur sera paire
+     * 
      */
     public Controler(FishHunt vue){
         this.vue = vue;
@@ -51,7 +57,10 @@ public class Controler {
     }
 
     /**
-     * Changer de scène pour le jeu et commencer une partie
+     * Changer de scène pour le jeu et commencer une partie.
+     * 
+     * @see Game
+     * @see FishHunt gameScene()
      */
     public void startGame(){
         game = new Game(vue.getWidth(), vue.getHeight());
@@ -59,14 +68,17 @@ public class Controler {
     }
 
     /**
-     * Changer de scène pour le leaderbord
+     * Changer de scène pour le leaderbord.
+     * 
+     * @see FishHunt leaderBoardScene()
      */
     public void goToLeaderBoard(){
         vue.leaderBoardScene(leaderBoard.getFormatedScoreStrings());
     }
 
     /**
-     * Ajouter le nom du joueur actuel au leaderbord
+     * Ajouter le nom du joueur actuel au leaderbord.
+     * 
      * @param name Le nom du joueur
      */
     public void addLastGameToLeaderBoard(String name){
@@ -74,9 +86,12 @@ public class Controler {
     }
 
     /**
-     * Permet d'aller au menu et elle permet d'enlever un joueur sans nom du leaderbord
-     * lorsque cette méthode est utilisée dans le bouton Menu du leaderbord
+     * Permet d'aller au menu.
+     * <p>
+     * Moment opportun pour enlever tout les joueurs invalides.
+     * <p>
      * @see FishHunt leaderBoardScene()
+     * @see FishHunt menu()
      */
     public void goToMenu(){
         vue.menu();
@@ -85,27 +100,15 @@ public class Controler {
 
     /**
      * Permet de contrôler les dessins du jeu selon la méthode update qui, elle, change les positions des
-     * objets
-     * @see Updatable
-     *<p>
+     * objets.
+     * <p>
+     * Update {@link #game}, demande a {@link #vue} de dessiner tout les element graphiques du jeu. S'occupe
+     * aussi de la transition vers la scene de leaderboard approprie au classement du score obtenu.
+     * 
      * @param dt La différence de temps écoulé entre le début et le temps actuel
-     *<p>
-     * drawCurseur dessine le curseur en fonction du temps et de la position x,y de celui-ci
-     * <p>
-     * drawGamHUD dessine les composantes du jeu(score, vie(s) restante(s), niveau actuel)
-     * <p>
-     * drawfish dessine un poisson (normal/spécial) avec ces composantes en x,y, l'image, la couleur de
-     *           l'image et sa direction
-     * <p>
-     * drawbullet dessine la cible avec ses composantes x,y et son rayon
-     * <p>
-     * drawbulle  dessine une bulle avec ses composantes x,y et son rayon
-
+     * @param context Contexte graphique de la scene durant une partie
      */
-
     public void updateGame(double dt, GraphicsContext context){
-
-
         game.update(dt);
 
         vue.drawCursor(this.cursorX, this.cursorY, context);
@@ -125,7 +128,8 @@ public class Controler {
         }
 
         /**
-         * Ajouter un score quand la partie se termine
+         * Ajouter un score quand la partie se termine.
+         * S'occupe de choisir la bonne scene a aficher selon le score obtenu.
          */
         if(game.getLoss()){
             Player player = new Player(game);
@@ -139,6 +143,8 @@ public class Controler {
 
     /**
      * Incrémenter le score de +1
+     * <p>
+     * !DEBUG!
      */
     public void incrementScore(){
         game.incrementScore(1);
@@ -146,6 +152,8 @@ public class Controler {
 
     /**
      * Incrémenter le niveau de +1
+     * <p>
+     * !DEBUG!
      */
     public void incrementLevel(){
         game.incrementLevel(1);;
@@ -153,6 +161,7 @@ public class Controler {
 
     /**
      * Incrémenter la vie de +1
+     * <p>
      * !DEBUG!
      */
     public void incrementLives(){
@@ -161,6 +170,7 @@ public class Controler {
 
     /**
      * Fait perdre la partie
+     * <p>
      * !DEBUG!
      */
     public void looseGame(){
@@ -168,7 +178,10 @@ public class Controler {
     }
 
     /**
-     * Initialise les positions x,y du curseur
+     * Modifie la position du curseur
+     * 
+     * @param posX Position en X du curseur
+     * @param posY Position en Y du curseur
      */
     public void setCursor(double posX, double posY){
         this.cursorX = posX;
@@ -177,7 +190,10 @@ public class Controler {
 
     /**
      * Ajoute un poisson normal, une étoile et un crabe
+     * <p>
      * !DEBUG!
+     * <p>
+     * @deprecated Restant de la phase test
      */
     public void spawnFish(){
         game.addNewFish();
@@ -186,8 +202,12 @@ public class Controler {
     }
 
     /**
-     * Ajoute la cible lorsqu'on clique sur le jeu avec le curseur
-     * @see FishHunt gameScene.setOnMouseClicked((event)
+     * Communique a la {@link #game} de tirer une balle.
+     * 
+     * @param posX Position en X ou la balle doit etre tiree
+     * @param posY Position en Y ou la balle doit etre tiree
+     * 
+     * @see FishHunt gameScene()
      */
     public void spawnBullet(double posX, double posY){
         game.addNewBullet(posX, posY);
