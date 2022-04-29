@@ -7,6 +7,7 @@
 package GameModel;
 
 import java.lang.Math;
+import Utility.Utility;
 /**
  * Poisson spécial se déplaçant en oscillant verticalement
  */
@@ -17,33 +18,43 @@ public class Etoile extends Fish {
      */
     private double spawnY;
 
+    /**
+     * Constructeur d'une étoile
+     * <p>
+     * {@link #posX}: Choisit aléatoirement la position en X. Soit a droite ou a gauche.
+     * <p>
+     * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
+     * <p>
+     * {@link #vX}: Vitesse en X initiale. 100*{@link #getLevel()}^1/3 + 200
+     * 
+     * @param game  Partie avec lequelle l'etoile de mer interagiera
+     */
     public Etoile(Game game) {
 
-        /**
-         * Constructeur d'une étoile
-         * @param game  Partie avec lequelle le crabe interagiera
-         * @param colorString
-         *       <p> La méthode qui dessine les poissons utilise un regex
-         *           On attribue un regex qui ne match pas celle-ci afin que l'étoile garde
-         *           sa couleur initiale
-         *           @see drawFish dans FishHunt
-         *           </p>
-         * @param Url Url de l'image de l'étoile
-         * @param spawnY Position initiale en Y de l'étoile
-         */
+        this.direction = Utility.randomChoice(game.getRandom(), -1, 1);
+        this.posX=0;
+        if(this.direction < 0){
+            this.posX = game.windowWidth;
+        }
 
-        super(game);
-        this.colorString = "XXX";
+        this.posY = Utility.randomInterval(game.getRandom(), 0.2, 0.8)*game.windowHeight;
+        
+        this.vX = direction*(100*Math.pow(game.getLevel(), (1d/3d))+200);
+
+        setColor("XXX");
         setUrl("/Image/star.png");
-        this.spawnY = getY();
+        setAlive(true);
+        setGame(game);
+        this.spawnY = this.posY;
     }
 
 
     /**
      * Simule le mouvement d'une étoile sur l'intervalle de temps spécifié.
+     * <p>
      * L'étoile avance linéairement en X selon la vitesse X du poisson normal sans gravité
      * En Y, elle avance en oscillant selon l'équation:
-     * y = 50*sin(pi*dt)
+     * y = 50*sin(pi*{@link #lifeTime})
      *
      * @see Updatable
      *
@@ -55,8 +66,8 @@ public class Etoile extends Fish {
         if(getAlive()){
             this.lifeTime += deltaTime;
 
-            setXY(getX()+deltaTime*getVX(), this.spawnY+(50*Math.sin(Math.PI*this.lifeTime)));
+            this.posX = this.posX + this.vX*deltaTime;
+            this.posY = this.spawnY+(50*Math.sin(Math.PI*this.lifeTime));
         }
-
     }
 }
