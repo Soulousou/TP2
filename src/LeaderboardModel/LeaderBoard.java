@@ -30,59 +30,51 @@ public class LeaderBoard {
      */
     Player lastPlayer;
 
+    /**
+     * Lire les données dans le fichier scores.txt avec le bon format.
+     * <p>
+     * A chaque lecture du fichier, uniquement obtenable par l'instanciation d'un {@link LeaderBoard},
+     * les donnees contenues dans le fichier ont leur format verifie et sont classes grace a l'interface {@link Comparable}.
+     * <p>
+     * L'idee est d'avoir un modele en memoire infaillible qui represente l'entierete du leaderboard du jeu.
+     */
     public LeaderBoard(){
         top10 = new ArrayList<>();
 
-        /**
-         * Lire les données dans le fichier scores.txt avec le bon format, sinon lancer l'exception
-         * BadDataFormat
-         */
         Scanner scan;
         try {
             scan = new Scanner(new File("scores.txt"));
             while(scan.hasNext()){
                 String line = scan.nextLine();
                 try{
-                    /**
-                     * À l'ouverture du fichier, répertorier les joueurs déjà présents
-                     */
                     Player newLinePlayer = new Player(line);
                     top10.add(newLinePlayer);
                 }catch(BadDataFormat e){
                     System.out.println("Error detected in scores.txt data format");
                 }
-                
             }
-
-        /**
-        * Si le fichier scores.txt n'est pas trouvé à l'exécution cette erreur est lancée
-        */
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             e.printStackTrace();
         }
-        /**
-         * À l'ouverture du fichier, le fichier est réorganiser dans le bon format, c'est-à-dire,
-         * trier les joueurs en ordre décroissant du score et enlever les scores en place supérieur à 10
-         */
+
         top10.sort(Comparator.reverseOrder());
         trimTop10();
     }
 
-
+    /**
+     * Ajouter et verifier que le joueur puisse entrer dans le leaderbord
+     * selon son score en le comparant aux autres joueurs
+     * contenus dans {@link #top10}.
+     * Il est ajouté selon l'ordre décroissant.
+     * <p>
+     * A la tentative d'ajout d'un nouveau score, le format de {@link #top10} est verifie et ajuste.
+     *
+     * @param player Joueur qui tente d'etre ajoute au leaderboard
+     * @return Un booleen qui represente si le joueur qui tente d'etre ajoute
+     * se classifie dans le top10 des meilleurs scores
+     */
     public boolean addPlayer(Player player){
-
-        /**
-         * Ajouter le joueur au leaderbord selon son score en le comparant aux autres joueurs de la
-         * ArrayList<Player>
-         * Il est ajouté selon l'ordre décroissant
-         *
-         * Similairement, la ArrayList<Player> de joueur est formatée en ordre décroissant de score et garde uniquement
-         * les 10 meilleurs scores
-         *
-         * @param playerAdded boolean qui indique que le joueur est ajouté
-         * @return playerAdded
-         */
 
         this.lastPlayer = player;
         boolean playerAdded = false;
@@ -104,7 +96,7 @@ public class LeaderBoard {
      * À partir de la ArrayList<Player> top10, les scores sont formatés selon le format d'affichage,
      * c'est-à-dire, #position-nom-score
      *
-     * @return le "String" avec ce format pour chaque joueur de la ArrayList<Player> top10
+     * @return l'{@link ArrayList} de {@link String} avec le bon format pour chaque {@link Player} contenu dans le {@link #top10}
      */
     public ArrayList<String> getFormatedScoreStrings(){
         ArrayList<String> formatedScores = new ArrayList<>();
@@ -123,7 +115,7 @@ public class LeaderBoard {
 
     /**
      * Enlever les players qui correspondent aux index 11 et plus
-     * de la ArrayList<Player> top10
+     * de {@link #top10}
      */
     private void trimTop10(){
         while(top10.size() > 11){
@@ -132,8 +124,10 @@ public class LeaderBoard {
     }
 
     /**
-     * Dans Controler addLastGameToLeaderBoard(String name), la valeur entrée dans la case nom
-     * est enregistrée et attribué à l'attribut name du "player"
+     * Interface permettant de nommer le joueur sans nom genere automatiquement 
+     * (avant qu'il ait pu donne son nom) a la fin d'une partie.
+     * 
+     * @param name Le nom qui sera donne au {@link #lastPlayer}
      */
     public void setLastPlayerInfo(String name){
         this.lastPlayer.name = name;
@@ -163,7 +157,6 @@ public class LeaderBoard {
     /**
      *  Enlever les joueurs du leaderbord qui n'ont pas entré de nom
      */
-
     public void removeUnamed(){
         ListIterator<Player> playerIterator = top10.listIterator();
         while(playerIterator.hasNext()){
