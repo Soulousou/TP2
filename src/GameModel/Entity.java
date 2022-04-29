@@ -7,11 +7,11 @@
 package GameModel;
 
 /**
- * Modèle general pour tout corps ayant des interactions avec l'instance de {@link #Game} auquel il y est rattaché.
+ * Modèle general pour tout corps ayant des interactions avec l'instance de {@link Game} auquel il y est rattaché.
  */
 public abstract class Entity {
     /**
-     * Instance de {@link #Game} avec lequel l'entité est associée.
+     * Instance de {@link Game} avec lequel l'entité est associée.
      */
     protected Game game;
 
@@ -43,38 +43,63 @@ public abstract class Entity {
      */
     protected String url;
 
+    /**
+     * Initialisateur de la variable {@link #game}.
+     * 
+     * @param game  Partie avec laquelle on veut lier l'entite
+     */
     protected void setGame(Game game){
         if(this.game == null){
             this.game = game;
         }
     }
 
+    /**
+     * Initialisateur de la variable {@link #url}.
+     * 
+     * @param url   Url menant a l'image representant l'entite
+     */
     protected void setUrl(String url){
         if(this.url == null){
             this.url = url;
         }
     }
 
-    protected void setXY(double x, double y){
-        this.posX = x;
-        this.posY = y;
-    }
+    /**
+     * Interface publique pour obtenir la vitesse en X.
+     * 
+     * @return  La vitesse en X de l'entite
+     */
+    public double getVX(){return this.vX;}
 
+    /**
+     * Interface publique pour obtenir la vitesse en Y.
+     * 
+     * @return  La vitesse en Y de l'entite
+     */
+    public double getVY(){return this.vY;}
 
-    public double getVX(){
-        return this.vX;
-    }
-
-    public double getVY(){
-        return this.vY;
-    }
-
+    /**
+     * Interface publique pour obtenir la position en X.
+     * 
+     * @return  La position en X de l'entite
+     */
     public double getX(){return this.posX;}
 
-    public double getY(){
-        return this.posY;
-    }
+    /**
+     * Interface publique pour obtenir la position en Y.
+     * 
+     * @return  La position en Y de l'entite
+     */
+    public double getY(){return this.posY;}
 
+    /**
+     * Interface publique pour obtenir le URL de l'image.
+     * <p>
+     * Usage graphique.
+     * 
+     * @return Le URL de l'image
+     */
     public String getUrL(){return this.url;}
 
 
