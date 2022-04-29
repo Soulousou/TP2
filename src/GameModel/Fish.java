@@ -1,6 +1,6 @@
 /**
  * @author Maxime Belanger et Sara Gair
- * Fichier : Game.java
+ * Fichier : Fish.java
  * Date: Pour le 29 avril 2022
  *
  * Constructeur et méthode des poissons normaux
