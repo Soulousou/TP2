@@ -69,20 +69,19 @@ public class LeaderBoard {
         trimTop10();
     }
 
-
+    /**
+     * Ajouter le joueur au leaderbord selon son score en le comparant aux autres joueurs de la
+     * ArrayList<Player>
+     * Il est ajouté selon l'ordre décroissant
+     *
+     * Similairement, la ArrayList<Player> de joueur est formatée en ordre décroissant de score et garde uniquement
+     * les 10 meilleurs scores
+     *
+     * {@Link playerAdded} playerAdded boolean qui indique que le joueur est ajouté
+     * @return playerAdded
+     */
     public boolean addPlayer(Player player){
 
-        /**
-         * Ajouter le joueur au leaderbord selon son score en le comparant aux autres joueurs de la
-         * ArrayList<Player>
-         * Il est ajouté selon l'ordre décroissant
-         *
-         * Similairement, la ArrayList<Player> de joueur est formatée en ordre décroissant de score et garde uniquement
-         * les 10 meilleurs scores
-         *
-         * @param playerAdded boolean qui indique que le joueur est ajouté
-         * @return playerAdded
-         */
 
         this.lastPlayer = player;
         boolean playerAdded = false;

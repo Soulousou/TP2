@@ -10,10 +10,13 @@ import GameModel.Game;
 /**
  * Un "player" est créé à chaque partie pour enregistrer son nom et son score
  * dans le leaderbard
- * @see LeaderBoard
+ * @see LeaderBoard#addPlayer(Player)
  */
 public class Player implements Comparable<Player>{
 
+/**
+ * Attributs du joueur
+ */
     /**
      * Score du joueur soit le nombre de poisson(s) capturé avant la fin de la partie
      */
@@ -34,11 +37,14 @@ public class Player implements Comparable<Player>{
          * Si ce format n'est pas respecté, l'exception BadDataFormat est lancée
          * @see BadDataFormat
          */
-        String regex = "#(\\d{1,2})-(.{1,})-(\\d{1,})"; //bon format du score à afficher
+        String regex = "#(\\d{1,2})-(.{1,})-(\\d{1,})";
         if(dataEntryLine.matches(regex)){
             this.score = Integer.parseInt(dataEntryLine.replaceAll(regex, "$3"));
             this.name = dataEntryLine.replaceAll(regex, "$2");
         }else{
+            /**
+            * @see BadDataFormat
+             * */
             throw new BadDataFormat();
         }
     }
