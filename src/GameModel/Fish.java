@@ -117,7 +117,7 @@ public class Fish extends Entity implements Updatable{
         if(getAlive()){
             this.lifeTime += deltaTime;
 
-            this.vY = this.posY + deltaTime*this.aY;
+            this.vY = this.vY + deltaTime*this.aY;
             this.posX = this.posX+deltaTime*this.vX;
             this.posY = this.posY + deltaTime*this.vY;
         }
