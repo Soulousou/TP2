@@ -1,6 +1,6 @@
 /**
  * @author Maxime Belanger et Sara Gair
- * Fichier : Game.java
+ * Fichier : Bulle.java
  * Date: Pour le 29 avril 2022
  *
  * Bulles faisant parties du décor

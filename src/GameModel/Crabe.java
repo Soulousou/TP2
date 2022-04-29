@@ -7,7 +7,7 @@
 package GameModel;
 
 /**
- * Poisson special, se deplace en allant et en retournant horizontalement sans se deplacer verticalement.
+ * Poisson spécial, se déplace en allant et en retournant horizontalement sans se déplacer verticalement.
  */
 public class Crabe extends Fish{
 
@@ -16,11 +16,11 @@ public class Crabe extends Fish{
      */
     private double changeInterval;
     /**
-     * Constante de la duree passee a avancer.
+     * Constante de la durée passée à avancer.
      */
     private final double forwardsTime = 0.5;
     /**
-     * Constante de la duree d'un cycle avance-recule.
+     * Constante de la durée d'un cycle avance-recule.
      */
     private final double periodTime = 0.75;
     /*
@@ -48,11 +48,11 @@ public class Crabe extends Fish{
     }
 
     /**
-     * Simule le mouvement d'un crabe sur l'intervalle de temps specifie.
+     * Simule le mouvement d'un crabe sur l'intervalle de temps spécifié.
      * 
      * @see Updatable
      * 
-     * @param deltaTime Intervalle de temps a simuler
+     * @param deltaTime Intervalle de temps à simuler
      */
     @Override
     public void update(double deltaTime){

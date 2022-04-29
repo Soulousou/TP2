@@ -60,19 +60,6 @@ public abstract class Entity {
         this.posY = y;
     }
 
-    protected void setVX(double vX){
-        this.vX = vX;
-    }
-
-    protected void setVY(double vY){
-        this.vY = vY;
-    }
-
-    protected void setAY(double aY){
-        this.aY = aY;
-    }
-
-    public Game getGame(){return this.game;}
 
     public double getVX(){
         return this.vX;
@@ -86,10 +73,6 @@ public abstract class Entity {
 
     public double getY(){
         return this.posY;
-    }
-
-    public double getAY(){
-        return this.aY;
     }
 
     public String getUrL(){return this.url;}
