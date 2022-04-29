@@ -15,6 +15,11 @@ import java.util.Random;
 
 import static Utility.Utility.randomChoice;
 
+/**
+ * Represente une partie du jeu FishHunt.
+ * <p>
+ * {@link #update()} simule le deroullement de la partie.
+ */
 public class Game implements Updatable {
     //Random
     /**
