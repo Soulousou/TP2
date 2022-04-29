@@ -59,11 +59,11 @@ public class Fish extends Entity implements Updatable{
          * <p>
          * {@link #posX}: Choisit aléatoirement la position en X. Soit a droite ou a gauche.
          * <p>
-         * {@link #posY}: Choisit aléatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
+         * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
          * <p>
          * {@link #vX}: Vitesse en X initiale. 100*{@link #getLevel()}^1/3 + 200
          * <p>
-         * {@link #vY}: Choisit aléatoirement la vitesse en Y initiale. [100; 200]
+         * {@link #vY}: Choisit aleatoirement la vitesse en Y initiale. [100; 200]
          * 
          * @param game  Partie avec laquelle le poisson interagiera
          */
