@@ -263,9 +263,6 @@ public class Game implements Updatable {
         this.levelScoreIncrement = 0;
         this.scoreIncrement = 0;
         this.livesIncrement = 0;
-
-        //TODO remove debug, inders performance
-        //System.out.println(fishes.size());
     }
 
     /**
