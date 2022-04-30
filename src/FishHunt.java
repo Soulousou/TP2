@@ -254,12 +254,7 @@ public class FishHunt extends Application{
                 case L:
                     controler.looseGame();
                     break;
-                /**
-                 * @see Controler#spawnFish()
-                 */
-                case S:
-                    controler.spawnFish();
-                    break;
+                    
                 default:
                     break;
             }
