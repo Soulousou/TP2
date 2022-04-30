@@ -46,7 +46,7 @@ public abstract class Entity {
     /**
      * Initialisateur de la variable {@link #game}.
      * 
-     * @param game  Partie avec laquelle on veut lier l'entite
+     * @param game  Partie avec laquelle on veut lier l'entité
      */
     protected void setGame(Game game){
         if(this.game == null){
@@ -57,7 +57,7 @@ public abstract class Entity {
     /**
      * Initialisateur de la variable {@link #url}.
      * 
-     * @param url   Url menant a l'image representant l'entite
+     * @param url   Url menant à l'image représentant l'entité
      */
     protected void setUrl(String url){
         if(this.url == null){
@@ -67,15 +67,15 @@ public abstract class Entity {
 
     /**
      * Interface publique pour obtenir la vitesse en X.
-     * 
-     * @return  La vitesse en X de l'entite
+     *
+     * @return  La vitesse en X de l'entité
      */
     public double getVX(){return this.vX;}
 
     /**
      * Interface publique pour obtenir la vitesse en Y.
-     * 
-     * @return  La vitesse en Y de l'entite
+     *
+     * @return  La vitesse en Y de l'entité
      */
     public double getVY(){return this.vY;}
 
@@ -89,7 +89,7 @@ public abstract class Entity {
     /**
      * Interface publique pour obtenir la position en Y.
      * 
-     * @return  La position en Y de l'entite
+     * @return  La position en Y de l'entité
      */
     public double getY(){return this.posY;}
 

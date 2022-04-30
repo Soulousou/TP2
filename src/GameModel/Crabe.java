@@ -38,9 +38,9 @@ public class Crabe extends Fish{
      * <p>
      * {@link #posX}: Choisit aléatoirement la position en X. Soit a droite ou a gauche.
      * <p>
-     * {@link #posY}: Choisit aleatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game windowHeight}
+     * {@link #posY}: Choisit aléatoirement la position en Y initiale du poisson. [0.2; 0.8]*{@link Game#windowHeight}
      * <p>
-     * {@link #vX}: Vitesse en X initiale. (100*{@link #getLevel()}^1/3 + 200)*1.3
+     * {@link #vX}: Vitesse en X initiale. (100*{@link Game#getLevel()}^1/3 + 200)*1.3
      * 
      * @see Crabe
      * 
@@ -71,7 +71,7 @@ public class Crabe extends Fish{
      * Simule le mouvement d'un crabe sur l'intervalle de temps spécifié.
      * <p>
      * Un crabe avance et recule en alternance. {@link #forwardsTime} et {@link #periodTime} marquent
-     * les moment ou un crabe change de direction.
+     * les moments ou un crabe change de direction.
      * 
      * @see Updatable
      * 

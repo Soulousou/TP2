@@ -20,14 +20,14 @@ public class Bulle extends Entity implements Updatable {
     /**
      * Constructeur d'une bulle. Elle apparait dans le jeu et se déplace vers le haut.
      * <p>
-     * Cette version du constructeur sert a initier un groupe de bulle sur lesquelle elles
+     * Cette version du constructeur sert à initier un groupe de bulle sur lesquelle elles
      * se baseront sur celle-ci pour se disperser.
      * <p>
-     * {@link #rayon}: Rayon choisit aleatoirement. [10; 40]
+     * {@link #rayon}: Rayon choisit aléatoirement. [10; 40]
      * <p>
-     * {@link #vY}: Vitesse en Y choisit aleatoirement. [350; 450]
+     * {@link #vY}: Vitesse en Y choisit aléatoirement. [350; 450]
      * <p>
-     * {@link #posX}: Position en X choisit aleatoirement. [0, {@link Game #windowWidth}]
+     * {@link #posX}: Position en X choisit aléatoirement. [0, {@link Game#windowWidth}]
      * <p>
      * {@link #posY}: Position en Y de la balle. 40px en dessous de la zone de jeu.
      * <p>
@@ -53,11 +53,11 @@ public class Bulle extends Entity implements Updatable {
      * <p>
      * Cette version permet de d'ajouter des bulles en "cluster" autour d'une bulle root.
      * <p>
-     * {@link #rayon}: Rayon choisit aleatoirement. [10; 40]
+     * {@link #rayon}: Rayon choisit aléatoirement. [10; 40]
      * <p>
-     * {@link #vY}: Vitesse en Y choisit aleatoirement. [350; 450]
+     * {@link #vY}: Vitesse en Y choisit aléatoirement. [350; 450]
      * <p>
-     * {@link #posX}: Position en X choisit aleatoirement a proximite de la bulle initiale. (+/- 20)
+     * {@link #posX}: Position en X choisit aléatoirement à proximité de la bulle initiale. (+/- 20)
      * <p>
      * {@link #posY}: Position en Y de la balle. 40px en dessous de la zone de jeu.
      * <p>
@@ -81,14 +81,14 @@ public class Bulle extends Entity implements Updatable {
      *Méthode qui update la position en Y des bulles par rapport au temps.
      * @see Updatable
      *
-     * @param deltaTime Intervale de temps sur laquelle il faut simuler le prochain état de la partie
+     * @param deltaTime Intervalle de temps sur laquelle il faut simuler le prochain état de la partie
      */
     @Override
     public void update(double deltaTime){
         this.posY = this.posY-deltaTime*this.vY;}
 
     /**
-     * Interface publique pour l'acces au rayon d'une bulle.
+     * Interface publique pour l'accès au rayon d'une bulle.
      * <p>
      * Usage graphique.
      * <p>
